@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aline Pacheco | Sugestões de Conteúdos</title>
+  <style>
+    :root {
+      --bg: #f7efe9;
+      --card: #fffaf6;
+      --text: #3d302b;
+      --muted: #7d6b63;
+      --accent: #b98574;
+      --accent-dark: #8f6257;
+      --soft: #ead8ce;
+      --shadow: 0 24px 70px rgba(61, 48, 43, 0.12);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, Arial, sans-serif;
+      background: radial-gradient(circle at top left, #fff7f1 0, var(--bg) 42%, #efe0d7 100%);
+      color: var(--text);
+      line-height: 1.65;
+    }
+    header {
+      padding: 54px 22px 28px;
+      text-align: center;
+    }
+    .eyebrow {
+      color: var(--accent-dark);
+      text-transform: uppercase;
+      letter-spacing: .16em;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    h1 {
+      margin: 0 auto;
+      max-width: 900px;
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: clamp(34px, 6vw, 68px);
+      line-height: 1.03;
+      font-weight: 500;
+    }
+    .subtitle {
+      max-width: 760px;
+      margin: 20px auto 0;
+      color: var(--muted);
+      font-size: 18px;
+    }
+    .tabs-wrap {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(247,239,233,.88);
+      backdrop-filter: blur(18px);
+      border-top: 1px solid rgba(185,133,116,.18);
+      border-bottom: 1px solid rgba(185,133,116,.18);
+      padding: 12px 12px;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+    .tabs {
+      display: flex;
+      gap: 10px;
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+    button.tab {
+      border: 1px solid rgba(185,133,116,.28);
+      background: rgba(255,250,246,.75);
+      color: var(--text);
+      padding: 11px 16px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: .2s ease;
+    }
+    button.tab.active, button.tab:hover {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+    main {
+      max-width: 1060px;
+      margin: 34px auto 70px;
+      padding: 0 18px;
+    }
+    .panel {
+      display: none;
+      background: rgba(255,250,246,.86);
+      border: 1px solid rgba(185,133,116,.2);
+      border-radius: 34px;
+      padding: clamp(26px, 5vw, 58px);
+      box-shadow: var(--shadow);
+      animation: fade .25s ease;
+    }
+    .panel.active { display: block; }
+    @keyframes fade { from { opacity: .25; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .number {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--accent-dark);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+    .number:before {
+      content: '';
+      width: 44px;
+      height: 1px;
+      background: var(--accent);
+      display: inline-block;
+    }
+    h2 {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: clamp(30px, 5vw, 54px);
+      line-height: 1.08;
+      font-weight: 500;
+      margin: 0 0 28px;
+      color: var(--text);
+    }
+    h3 {
+      margin-top: 32px;
+      font-size: 14px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--accent-dark);
+    }
+    p { font-size: 18px; color: var(--text); }
+    .caption {
+      margin-top: 18px;
+      padding: 28px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, rgba(234,216,206,.72), rgba(255,255,255,.52));
+      border: 1px solid rgba(185,133,116,.2);
+      color: var(--text);
+      white-space: pre-line;
+      font-size: 18px;
+    }
+    footer {
+      text-align: center;
+      padding: 34px 18px 46px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+    @media (max-width: 640px) {
+      header { padding-top: 36px; }
+      .subtitle, p, .caption { font-size: 16px; }
+      .panel { border-radius: 24px; }
+      button.tab { padding: 10px 13px; font-size: 13px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="eyebrow">Aline Pacheco</div>
+    <h1>Sugestões de conteúdos com comunicação emocional e acolhedora</h1>
+    <p class="subtitle">Temas pensados para manter o mesmo tom sensível, profundo e humano, com textos que geram identificação, acolhimento e conexão.</p>
+  </header>
+
+  <nav class="tabs-wrap"><div class="tabs" id="tabs"></div></nav>
+  <main id="content"></main>
+  <footer>Clique Criativo I Marketing Estratégico - +55 (81) 8489 - 7234</footer>
+
+<script>
+const temas = [
+{t:'Você não ficou forte. Você só aprendeu a sobreviver.',d:'Tem pessoas que parecem fortes o tempo inteiro. Resolvem tudo, seguram tudo, ajudam todo mundo e continuam funcionando mesmo quando estão cansadas emocionalmente. Mas, muitas vezes, isso não nasceu da força. Nasceu da necessidade. Da infância onde precisaram amadurecer cedo demais. Do ambiente onde sentir parecia perigoso. Da sensação constante de que não podiam desabar porque ninguém iria sustentar suas emoções. Com o tempo, elas aprendem a engolir o choro, minimizar a própria dor e seguir funcionando mesmo exaustas. E então começam a acreditar que isso é força. Mas sobreviver em alerta o tempo inteiro também cansa. Nem toda pessoa forte está em paz. Algumas só nunca tiveram a chance de descansar emocionalmente.',l:'Tem pessoas que foram chamadas de fortes a vida inteira…\nquando, na verdade, só estavam tentando sobreviver.\n\nSobreviver ao medo.\nÀ ausência.\nÀ insegurança.\nÀ necessidade de amadurecer cedo demais.\n\nE talvez o mais cansativo seja justamente isso:\ncontinuar funcionando enquanto ninguém percebe o quanto você também precisava de colo.'},
+{t:'Nem toda infância difícil parece triste.',d:'Algumas crianças não choravam muito. Não davam trabalho. Eram educadas, quietas, responsáveis e maduras para a idade. E justamente por isso, muita gente acreditava que estava tudo bem. Mas algumas crianças aprendem cedo que ocupar espaço emocional pode gerar rejeição, conflito ou abandono. Então elas silenciam sentimentos, escondem necessidades e começam a se adaptar para sobreviver emocionalmente. A criança muito madura nem sempre amadureceu. Às vezes ela apenas percebeu cedo demais que precisava se virar sozinha. E isso costuma acompanhar a vida adulta: dificuldade de pedir ajuda, medo de incomodar, excesso de autocontrole e necessidade constante de aprovação.',l:'Nem toda infância difícil parece triste.\n\nAlgumas parecem silenciosas.\nResponsáveis demais.\nMaduras demais.\nQuietas demais.\n\nTem crianças que não aprenderam a ficar bem.\nAprenderam apenas a não incomodar.\n\nE muitas carregam isso até hoje sem perceber.'},
+{t:'Você não precisa carregar todo mundo.',d:'Existem pessoas que se tornam apoio emocional para todos ao redor. Escutam, acolhem, resolvem, ajudam, organizam, sustentam e continuam disponíveis mesmo quando estão emocionalmente esgotadas. Com o tempo, elas se acostumam tanto a cuidar dos outros que esquecem de olhar para si. Sentem culpa ao descansar. Culpa ao dizer não. Culpa ao priorizar as próprias necessidades. Muitas vezes isso nasce da ideia inconsciente de que precisam ser úteis para merecer amor, aceitação ou permanência. Mas ninguém consegue viver sustentando o mundo inteiro sem adoecer emocionalmente.',l:'Tem gente que virou abrigo para todo mundo…\nmas nunca encontrou um lugar seguro para descansar também.\n\nVocê não precisa carregar tudo sozinho.\nNem sustentar o emocional de todos o tempo inteiro.\n\nQuem cuida também precisa ser cuidado.'},
+{t:'Você não é difícil de amar.',d:'Muitas pessoas cresceram acreditando que eram “demais”. Sensíveis demais, intensas demais, emocionais demais, difíceis demais. E, aos poucos, começaram a esconder partes de si para caber nos lugares, nos relacionamentos e nas expectativas dos outros. Mas quando alguém cresce sem acolhimento emocional, frequentemente interpreta a falta de amor recebido como defeito pessoal. Então tenta falar menos, sentir menos, pedir menos e ocupar menos espaço. Só que a ausência de acolhimento nunca definiu o seu valor.',l:'Talvez você nunca tenha sido difícil de amar.\n\nTalvez só tenha passado tempo demais tentando receber amor em lugares que não sabiam acolher quem você era de verdade.\n\nE isso faz muita gente acreditar que precisa diminuir a própria intensidade para permanecer.\n\nMas amor saudável não exige que você desapareça para caber.'},
+{t:'Tem dores que ninguém percebe.',d:'Nem todo sofrimento é visível. Algumas pessoas aprenderam a sorrir enquanto estavam emocionalmente cansadas. Continuam trabalhando, conversando, ajudando e seguindo a rotina normalmente, mesmo carregando dores silenciosas dentro de si. Porque nem sempre o sofrimento aparece em crises. Às vezes ele aparece no cansaço constante, na dificuldade de descansar, na autocobrança excessiva e na sensação de estar emocionalmente sobrecarregado o tempo inteiro. O problema é que pessoas que suportam muita coisa costumam receber menos acolhimento, justamente porque parecem estar bem.',l:'Nem todo sofrimento faz barulho.\n\nAlgumas pessoas aprenderam a continuar sorrindo enquanto sentiam tudo em silêncio.\n\nE talvez uma das coisas mais dolorosas seja justamente isso:\nparecer forte o suficiente para que ninguém perceba que você também está cansado.'},
+{t:'Você se acostumou a engolir o que sente.',d:'Algumas pessoas aprenderam, ao longo da vida, que demonstrar sentimento poderia virar problema. Então passaram a engolir o choro, controlar as palavras, esconder incômodos e fingir que estava tudo bem. Esse comportamento pode parecer maturidade, mas muitas vezes é apenas medo de ser rejeitado, invalidado ou visto como exagero. Quando alguém se acostuma a calar tudo o que sente, começa a perder contato com as próprias necessidades. E, aos poucos, a dor que não foi dita começa a aparecer em forma de cansaço, irritação, distância ou vazio.',l:'Você foi aprendendo a sobreviver em silêncio…\naté esquecer como pedir ajuda.\n\nMas sentir não te torna fraca.\nFalar sobre o que dói não te torna difícil.\n\nTalvez o problema nunca tenha sido sentir demais.\nTalvez você só tenha sentido tudo sozinha por tempo demais.'},
+{t:'Tem gente que sente culpa até quando descansa.',d:'Para algumas pessoas, descansar não parece descanso. Parece erro. Parece perda de tempo. Parece falta de responsabilidade. Isso acontece quando o valor pessoal foi construído em cima da produtividade, do desempenho e da necessidade constante de dar conta de tudo. Pessoas assim costumam sentir que precisam merecer pausa, merecer cuidado e merecer leveza. Mas descanso não deveria ser prêmio por exaustão. Descansar também é uma necessidade emocional. Ninguém consegue viver em estado constante de cobrança sem se perder de si.',l:'Tem gente que não descansa nem quando para.\n\nPorque a mente continua cobrando.\nO corpo continua em alerta.\nE a culpa aparece como se descansar fosse errado.\n\nMas você não precisa chegar no limite para merecer pausa.\nDescansar também é humano.'},
+{t:'Nem toda ausência deixa a casa vazia.',d:'Existe um tipo de ausência que não aparece nas fotos de família. A pessoa estava ali, morava na mesma casa, fazia parte da rotina, mas emocionalmente não estava disponível. Essa ausência silenciosa também marca. Marca quando a criança tenta contar algo e não é ouvida. Quando sente medo e não encontra acolhimento. Quando precisa de validação e recebe frieza. Na vida adulta, essa falta pode aparecer como medo de rejeição, dificuldade de confiar, necessidade de aprovação e sensação constante de não ser importante o suficiente.',l:'Nem toda ausência acontece quando alguém vai embora.\n\nÀs vezes a pessoa estava ali.\nMas não escutava.\nNão acolhia.\nNão percebia.\n\nE tem silêncios que atravessam uma infância inteira.\nA ausência emocional também deixa marcas.'},
+{t:'Você não precisa se diminuir para ser amado.',d:'Muitas pessoas aprenderam a caber diminuindo. Falam menos para não incomodar, pedem menos para não parecerem exigentes, sentem menos para não serem chamadas de intensas e aceitam menos do que precisam para não perder vínculos. Só que relações saudáveis não exigem apagamento. Quando alguém precisa deixar de existir emocionalmente para permanecer em um lugar, talvez esse lugar não esteja oferecendo amor, mas apenas uma forma de aceitação condicionada. Amor de verdade não pede que você desapareça para ser tolerada.',l:'Você não precisa se tornar menor para caber no amor de alguém.\n\nNão precisa esconder o que sente.\nNão precisa pedir desculpa por existir.\nNão precisa se apagar para permanecer.\n\nRelacionamento saudável não exige que você desapareça para caber.'},
+{t:'A necessidade de agradar também pode nascer da dor.',d:'Agradar pode parecer apenas gentileza, mas, em algumas histórias, é uma estratégia de sobrevivência emocional. A pessoa aprende que precisa ser fácil, útil, agradável e disponível para não ser rejeitada. Então passa a dizer sim quando queria dizer não, a evitar conflitos, a medir palavras e a se responsabilizar pelo bem-estar de todos ao redor. Com o tempo, agradar deixa de ser escolha e vira medo. Medo de decepcionar, de ser abandonada, de perder afeto. Mas quem vive tentando não decepcionar os outros quase sempre acaba abandonando a si mesmo.',l:'Às vezes você não aprendeu a agradar.\nAprendeu a sobreviver sendo aceita.\n\nAprendeu a dizer sim.\nA evitar conflito.\nA não frustrar ninguém.\nA se adaptar para permanecer.\n\nMas quem vive tentando não decepcionar os outros quase sempre acaba abandonando a si mesma.'}
+];
+const tabs = document.getElementById('tabs');
+const content = document.getElementById('content');
+temas.forEach((item,i)=>{
+  const b=document.createElement('button'); b.className='tab'+(i===0?' active':''); b.textContent='Tema '+(i+1); b.onclick=()=>show(i); tabs.appendChild(b);
+  const s=document.createElement('section'); s.className='panel'+(i===0?' active':'');
+  s.innerHTML=`<div class="number">Tema ${i+1}</div><h2>${item.t}</h2><h3>Descrição detalhada</h3><p>${item.d}</p><h3>Legenda</h3><div class="caption">${item.l}</div>`;
+  content.appendChild(s);
+});
+function show(i){document.querySelectorAll('.tab').forEach((e,k)=>e.classList.toggle('active',k===i));document.querySelectorAll('.panel').forEach((e,k)=>e.classList.toggle('active',k===i));window.scrollTo({top:document.querySelector('.tabs-wrap').offsetTop,behavior:'smooth'});}
+</script>
+</body>
+</html>
