@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cabaninhas do Joca | Sugestões de Conteúdos</title>
+  <style>
+    :root {
+      --bg: #f5efe7;
+      --card: #fffaf3;
+      --text: #3b2f26;
+      --muted: #7a6655;
+      --accent: #d59b55;
+      --accent-dark: #8a5a2b;
+      --green: #6f8a5b;
+      --soft: #ead8bd;
+      --shadow: 0 24px 70px rgba(59,47,38,0.13);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, Arial, sans-serif;
+      background: radial-gradient(circle at top left, #fff6e8 0, var(--bg) 45%, #e9ddcf 100%);
+      color: var(--text);
+      line-height: 1.65;
+    }
+    header { padding: 54px 22px 28px; text-align: center; }
+    .eyebrow {
+      color: var(--accent-dark);
+      text-transform: uppercase;
+      letter-spacing: .16em;
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+    h1 {
+      margin: 0 auto;
+      max-width: 940px;
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: clamp(34px, 6vw, 68px);
+      line-height: 1.03;
+      font-weight: 500;
+    }
+    .subtitle {
+      max-width: 760px;
+      margin: 20px auto 0;
+      color: var(--muted);
+      font-size: 18px;
+    }
+    .insight {
+      max-width: 860px;
+      margin: 28px auto 0;
+      padding: 20px 24px;
+      border-radius: 24px;
+      background: rgba(255,250,243,.72);
+      border: 1px solid rgba(213,155,85,.22);
+      color: var(--muted);
+      font-size: 16px;
+    }
+    .tabs-wrap {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(245,239,231,.9);
+      backdrop-filter: blur(18px);
+      border-top: 1px solid rgba(213,155,85,.2);
+      border-bottom: 1px solid rgba(213,155,85,.2);
+      padding: 12px;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+    .tabs { display: flex; gap: 10px; max-width: 1180px; margin: 0 auto; }
+    button.tab {
+      border: 1px solid rgba(213,155,85,.32);
+      background: rgba(255,250,243,.82);
+      color: var(--text);
+      padding: 11px 16px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 800;
+      transition: .2s ease;
+    }
+    button.tab.active, button.tab:hover {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+    main { max-width: 1060px; margin: 34px auto 70px; padding: 0 18px; }
+    .panel {
+      display: none;
+      background: rgba(255,250,243,.9);
+      border: 1px solid rgba(213,155,85,.22);
+      border-radius: 34px;
+      padding: clamp(26px, 5vw, 58px);
+      box-shadow: var(--shadow);
+      animation: fade .25s ease;
+    }
+    .panel.active { display: block; }
+    @keyframes fade { from { opacity: .25; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .number {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--accent-dark);
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+    .number:before { content: ''; width: 44px; height: 1px; background: var(--accent); display: inline-block; }
+    h2 {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: clamp(30px, 5vw, 54px);
+      line-height: 1.08;
+      font-weight: 500;
+      margin: 0 0 28px;
+      color: var(--text);
+    }
+    h3 { margin-top: 32px; font-size: 14px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent-dark); }
+    p { font-size: 18px; color: var(--text); }
+    .caption {
+      margin-top: 18px;
+      padding: 28px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, rgba(234,216,189,.75), rgba(255,255,255,.58));
+      border: 1px solid rgba(213,155,85,.24);
+      color: var(--text);
+      white-space: pre-line;
+      font-size: 18px;
+    }
+    footer { text-align: center; padding: 34px 18px 46px; color: var(--muted); font-weight: 800; }
+    @media (max-width: 640px) {
+      header { padding-top: 36px; }
+      .subtitle, p, .caption { font-size: 16px; }
+      .panel { border-radius: 24px; }
+      button.tab { padding: 10px 13px; font-size: 13px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="eyebrow">Cabaninhas do Joca</div>
+    <h1>Sugestões de conteúdos para fortalecer desejo, memória afetiva e reservas</h1>
+    <p class="subtitle">Ideias criadas com base no que tende a funcionar melhor para o perfil: experiência real, encantamento visual, família, aconchego, natureza e momentos que viram lembrança.</p>
+    <div class="insight">Linha estratégica: menos venda direta e mais construção de vontade. O conteúdo precisa fazer a pessoa imaginar a criança vivendo a experiência, a família descansando e o fim de semana se transformando em memória.</div>
+  </header>
+
+  <nav class="tabs-wrap"><div class="tabs" id="tabs"></div></nav>
+  <main id="content"></main>
+  <footer>Clique Criativo I Marketing Estratégico - +55 (81) 8489 - 7234</footer>
+
+<script>
+const temas = [
+{t:'O fim de semana que seu filho vai lembrar por muito tempo.',d:'Esse conteúdo deve trabalhar o valor emocional da experiência, não apenas a hospedagem. A ideia é mostrar que uma diária, uma cabaninha ou uma tarde em família pode se transformar em uma lembrança afetiva para a criança. O foco não é vender uma estrutura, mas despertar nos pais a percepção de que momentos simples, quando vividos com presença, viram memória. O texto pode falar sobre sair da rotina, desligar um pouco das telas, respirar ar puro, brincar sem pressa e criar histórias que depois serão lembradas com carinho.',l:'Tem passeios que acabam no mesmo dia.\nMas tem experiências que ficam guardadas na memória.\n\nUma cabaninha, um tempo ao ar livre, uma pausa na rotina e a alegria de ver as crianças vivendo algo diferente.\n\nÀs vezes, o melhor presente não é uma coisa.\nÉ um momento vivido junto.'},
+{t:'Seu filho não precisa de muito. Precisa de presença.',d:'Esse tema conversa diretamente com pais que vivem na correria e sentem culpa por não conseguirem estar tão presentes quanto gostariam. A abordagem deve ser sensível, sem pesar demais. A cabaninha entra como cenário de reconexão: um lugar onde a família desacelera, conversa, brinca e se olha com mais calma. O conteúdo funciona bem em Reels com cenas naturais de família, detalhes da cabana, natureza, café da manhã e crianças brincando.',l:'No fim, criança não lembra só do lugar.\nLembra de quem estava junto.\n\nLembra da brincadeira, da risada, do colo, da conversa antes de dormir e daquele dia em que todo mundo parecia ter mais tempo.\n\nAqui, a experiência é simples: desacelerar, brincar e viver junto.'},
+{t:'Uma noite diferente pode mudar a semana inteira.',d:'Aqui a ideia é mostrar que a experiência nas cabaninhas não precisa ser vista apenas como viagem grande ou programação rara. Pode ser uma pausa curta, mas suficiente para renovar a família. O conteúdo pode explorar o antes e depois: a rotina corrida, as crianças agitadas, os pais cansados, e depois o clima de descanso, brincadeira e conexão. É um tema bom para carrossel ou Reels de transformação de rotina.',l:'Às vezes a família não precisa de uma viagem longa.\nPrecisa só de uma pausa de verdade.\n\nUma noite diferente.\nUm lugar acolhedor.\nCrianças brincando.\nPais respirando.\nE a sensação de que a rotina pode ficar mais leve depois de um momento bem vivido.'},
+{t:'Criança feliz não pede luxo. Pede espaço para imaginar.',d:'Esse conteúdo deve valorizar a simplicidade encantadora da cabaninha. Em vez de focar em estrutura sofisticada, a comunicação deve mostrar que o diferencial está no imaginário infantil: dormir em uma cabana, brincar de aventura, criar histórias, explorar o ambiente e sentir que está vivendo algo mágico. O tom deve ser lúdico, familiar e afetivo, mostrando que a experiência toca a criança pela imaginação.',l:'Para uma criança, uma cabaninha nunca é só uma cabaninha.\n\nPode virar castelo.\nAcampamento.\nEsconderijo.\nAventura.\nUm mundo inteiro criado pela imaginação.\n\nE talvez seja por isso que experiências simples marcam tanto.'},
+{t:'O tipo de passeio que aproxima a família sem precisar forçar nada.',d:'A proposta é mostrar que alguns ambientes naturalmente criam conexão. Quando a família sai da rotina, reduz distrações e entra em um espaço mais acolhedor, a conversa acontece, a brincadeira surge e o vínculo aparece sem precisar de grandes planejamentos. O conteúdo pode ser construído com cenas espontâneas e texto leve, reforçando que o lugar facilita momentos reais entre pais e filhos.',l:'Tem lugares que parecem convidar a família a ficar mais perto.\n\nSem pressa.\nSem tela o tempo todo.\nSem aquela correria de todos os dias.\n\nSó o momento acontecendo, as crianças brincando e a família vivendo algo simples, mas cheio de significado.'},
+{t:'A infância passa rápido. As memórias ficam.',d:'Esse é um conteúdo mais emocional, com grande potencial de salvamento e compartilhamento. O texto deve lembrar que a infância é uma fase breve e que muitas vezes os pais estão tão envolvidos na rotina que esquecem de criar pausas significativas. A cabaninha aparece como um convite para viver agora, enquanto a criança ainda se encanta com pequenas aventuras e quer dividir esses momentos com a família.',l:'A infância passa mais rápido do que a gente imagina.\n\nUm dia eles ainda pedem colo.\nAinda se encantam com uma cabaninha.\nAinda querem brincar, correr, imaginar e chamar a gente para viver junto.\n\nPor isso, alguns momentos não deveriam ficar para depois.'},
+{t:'O presente que não ocupa espaço no quarto, mas fica no coração.',d:'Esse tema é ideal para datas comemorativas, aniversários, Dia das Crianças, férias ou fim de semana especial. A proposta é posicionar a experiência como presente afetivo, não como produto. Em vez de comprar mais um brinquedo, os pais podem oferecer uma vivência diferente, com tempo de qualidade, diversão e lembranças. É um conteúdo com potencial comercial, mas com tom emocional e delicado.',l:'Nem todo presente precisa vir embrulhado.\n\nAlguns presentes são vividos.\nSão uma noite diferente, uma brincadeira nova, uma risada em família e uma lembrança que a criança vai guardar com carinho.\n\nPorque tem coisa que não ocupa espaço no quarto.\nMas fica para sempre no coração.'},
+{t:'Férias com gosto de infância de verdade.',d:'Esse conteúdo deve ser pensado para períodos de férias escolares ou recessos. O foco é fugir da ideia de férias apenas como ocupação das crianças. A abordagem deve mostrar férias como tempo de viver experiências, brincar ao ar livre, sair da rotina e criar histórias. Pode funcionar muito bem com imagens de crianças felizes, detalhes naturais, cabaninhas arrumadas e cenas de convivência familiar.',l:'Férias boas não precisam ser complicadas.\n\nÀs vezes, tudo que uma criança precisa é de um lugar diferente, liberdade para brincar, uma cabaninha para imaginar histórias e a família por perto.\n\nFérias com cara de infância.\nDaquelas que a gente lembra com sorriso depois.'},
+{t:'Aqui, a criança brinca e os pais respiram.',d:'Esse tema trabalha uma dor prática dos pais: encontrar um lugar onde as crianças se divirtam e os adultos também consigam relaxar. O conteúdo pode equilibrar desejo e funcionalidade, mostrando que a experiência é boa para todos. A criança vive a aventura; os pais descansam, acompanham, registram e aproveitam sem a pressão de criar uma programação complexa.',l:'Um lugar bom para criança também precisa ser bom para os pais.\n\nAqui, eles brincam, imaginam, se divertem e vivem algo diferente.\nE os adultos conseguem respirar, acompanhar de perto e aproveitar sem tanta correria.\n\nPorque o melhor passeio é aquele em que todo mundo volta mais leve.'},
+{t:'Quando foi a última vez que vocês fizeram algo diferente juntos?',d:'Esse conteúdo usa uma pergunta direta para gerar identificação e reflexão. A ideia é provocar os pais de forma leve: a rotina vai passando, os dias ficam parecidos e, quando percebem, faz tempo que a família não vive uma experiência diferente. A cabaninha entra como resposta simples e possível para quebrar a rotina. É ótimo para post estático, story com enquete ou Reels com narração curta.',l:'Quando foi a última vez que vocês fizeram algo diferente juntos?\n\nNão precisa ser uma grande viagem.\nNão precisa ser algo distante.\nÀs vezes, uma experiência simples já muda o fim de semana inteiro.\n\nUma cabaninha.\nUm tempo em família.\nUma memória nova para guardar.'}
+];
+const tabs = document.getElementById('tabs');
+const content = document.getElementById('content');
+temas.forEach((item,i)=>{
+  const b=document.createElement('button'); b.className='tab'+(i===0?' active':''); b.textContent='Tema '+(i+1); b.onclick=()=>show(i); tabs.appendChild(b);
+  const s=document.createElement('section'); s.className='panel'+(i===0?' active':'');
+  s.innerHTML=`<div class="number">Tema ${i+1}</div><h2>${item.t}</h2><h3>Descrição detalhada</h3><p>${item.d}</p><h3>Legenda</h3><div class="caption">${item.l}</div>`;
+  content.appendChild(s);
+});
+function show(i){document.querySelectorAll('.tab').forEach((e,k)=>e.classList.toggle('active',k===i));document.querySelectorAll('.panel').forEach((e,k)=>e.classList.toggle('active',k===i));window.scrollTo({top:document.querySelector('.tabs-wrap').offsetTop,behavior:'smooth'});}
+</script>
+</body>
+</html>
