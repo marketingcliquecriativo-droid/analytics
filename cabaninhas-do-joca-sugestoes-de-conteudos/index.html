@@ -5,147 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cabaninhas do Joca | Sugestões de Conteúdos</title>
   <style>
-    :root {
-      --bg: #f5efe7;
-      --card: #fffaf3;
-      --text: #3b2f26;
-      --muted: #7a6655;
-      --accent: #d59b55;
-      --accent-dark: #8a5a2b;
-      --green: #6f8a5b;
-      --soft: #ead8bd;
-      --shadow: 0 24px 70px rgba(59,47,38,0.13);
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Inter, Arial, sans-serif;
-      background: radial-gradient(circle at top left, #fff6e8 0, var(--bg) 45%, #e9ddcf 100%);
-      color: var(--text);
-      line-height: 1.65;
-    }
-    header { padding: 54px 22px 28px; text-align: center; }
-    h1 {
-      margin: 0 auto;
-      max-width: 940px;
-      font-family: Georgia, 'Times New Roman', serif;
-      font-size: clamp(34px, 6vw, 68px);
-      line-height: 1.03;
-      font-weight: 500;
-    }
-    .tabs-wrap {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      background: rgba(245,239,231,.9);
-      backdrop-filter: blur(18px);
-      border-top: 1px solid rgba(213,155,85,.2);
-      border-bottom: 1px solid rgba(213,155,85,.2);
-      padding: 12px;
-      overflow-x: auto;
-      white-space: nowrap;
-    }
-    .tabs { display: flex; gap: 10px; max-width: 1180px; margin: 0 auto; }
-    button.tab {
-      border: 1px solid rgba(213,155,85,.32);
-      background: rgba(255,250,243,.82);
-      color: var(--text);
-      padding: 11px 16px;
-      border-radius: 999px;
-      cursor: pointer;
-      font-weight: 800;
-      transition: .2s ease;
-    }
-    button.tab.active, button.tab:hover {
-      background: var(--accent);
-      color: #fff;
-      border-color: var(--accent);
-      transform: translateY(-1px);
-    }
-    main { max-width: 1060px; margin: 34px auto 70px; padding: 0 18px; }
-    .panel {
-      display: none;
-      background: rgba(255,250,243,.9);
-      border: 1px solid rgba(213,155,85,.22);
-      border-radius: 34px;
-      padding: clamp(26px, 5vw, 58px);
-      box-shadow: var(--shadow);
-      animation: fade .25s ease;
-    }
-    .panel.active { display: block; }
-    @keyframes fade { from { opacity: .25; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-    .number {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      color: var(--accent-dark);
-      font-size: 13px;
-      font-weight: 900;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      margin-bottom: 18px;
-    }
-    .number:before { content: ''; width: 44px; height: 1px; background: var(--accent); display: inline-block; }
-    h2 {
-      font-family: Georgia, 'Times New Roman', serif;
-      font-size: clamp(30px, 5vw, 54px);
-      line-height: 1.08;
-      font-weight: 500;
-      margin: 0 0 28px;
-      color: var(--text);
-    }
-    h3 { margin-top: 32px; font-size: 14px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent-dark); }
-    p { font-size: 18px; color: var(--text); }
-    .caption {
-      margin-top: 18px;
-      padding: 28px;
-      border-radius: 24px;
-      background: linear-gradient(135deg, rgba(234,216,189,.75), rgba(255,255,255,.58));
-      border: 1px solid rgba(213,155,85,.24);
-      color: var(--text);
-      white-space: pre-line;
-      font-size: 18px;
-    }
-    footer { text-align: center; padding: 34px 18px 46px; color: var(--muted); font-weight: 800; }
-    @media (max-width: 640px) {
-      header { padding-top: 36px; }
-      p, .caption { font-size: 16px; }
-      .panel { border-radius: 24px; }
-      button.tab { padding: 10px 13px; font-size: 13px; }
-    }
+    :root{--bg:#f5efe7;--card:#fffaf3;--text:#3b2f26;--muted:#7a6655;--accent:#d59b55;--accent-dark:#8a5a2b;--shadow:0 24px 70px rgba(59,47,38,.13)}*{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,sans-serif;background:radial-gradient(circle at top left,#fff6e8 0,var(--bg) 45%,#e9ddcf 100%);color:var(--text);line-height:1.65}header{padding:54px 22px 28px;text-align:center}h1{margin:0 auto;max-width:940px;font-family:Georgia,'Times New Roman',serif;font-size:clamp(34px,6vw,68px);line-height:1.03;font-weight:500}.tabs-wrap{position:sticky;top:0;z-index:10;background:rgba(245,239,231,.9);backdrop-filter:blur(18px);border-top:1px solid rgba(213,155,85,.2);border-bottom:1px solid rgba(213,155,85,.2);padding:12px;overflow-x:auto;white-space:nowrap}.tabs{display:flex;gap:10px;max-width:1180px;margin:0 auto}button.tab{border:1px solid rgba(213,155,85,.32);background:rgba(255,250,243,.82);color:var(--text);padding:11px 16px;border-radius:999px;cursor:pointer;font-weight:800;transition:.2s ease}button.tab.active,button.tab:hover{background:var(--accent);color:#fff;border-color:var(--accent);transform:translateY(-1px)}main{max-width:1060px;margin:34px auto 70px;padding:0 18px}.panel{display:none;background:rgba(255,250,243,.9);border:1px solid rgba(213,155,85,.22);border-radius:34px;padding:clamp(26px,5vw,58px);box-shadow:var(--shadow);animation:fade .25s ease}.panel.active{display:block}@keyframes fade{from{opacity:.25;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}.number{display:inline-flex;align-items:center;gap:10px;color:var(--accent-dark);font-size:13px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;margin-bottom:18px}.number:before{content:'';width:44px;height:1px;background:var(--accent);display:inline-block}h2{font-family:Georgia,'Times New Roman',serif;font-size:clamp(30px,5vw,54px);line-height:1.08;font-weight:500;margin:0 0 28px;color:var(--text)}h3{margin-top:32px;font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-dark)}p{font-size:18px;color:var(--text)}.caption{margin-top:18px;padding:28px;border-radius:24px;background:linear-gradient(135deg,rgba(234,216,189,.75),rgba(255,255,255,.58));border:1px solid rgba(213,155,85,.24);color:var(--text);white-space:pre-line;font-size:18px}footer{text-align:center;padding:34px 18px 46px;color:var(--muted);font-weight:800}@media(max-width:640px){header{padding-top:36px}p,.caption{font-size:16px}.panel{border-radius:24px}button.tab{padding:10px 13px;font-size:13px}}
   </style>
 </head>
 <body>
-  <header>
-    <h1>Sugestão de Conteúdos - Cabaninhas do Joca</h1>
-  </header>
-
-  <nav class="tabs-wrap"><div class="tabs" id="tabs"></div></nav>
-  <main id="content"></main>
-  <footer>Clique Criativo I Marketing Estratégico - +55 (81) 8489 - 7234</footer>
-
+<header><h1>Sugestão de Conteúdos - Cabaninhas do Joca</h1></header>
+<nav class="tabs-wrap"><div class="tabs" id="tabs"></div></nav><main id="content"></main><footer>Clique Criativo I Marketing Estratégico - +55 (81) 8489 - 7234</footer>
 <script>
-const temas = [
-{t:'O fim de semana que seu filho vai lembrar por muito tempo.',d:'Esse conteúdo deve trabalhar o valor emocional da experiência, não apenas a hospedagem. A ideia é mostrar que uma diária, uma cabaninha ou uma tarde em família pode se transformar em uma lembrança afetiva para a criança. O foco não é vender uma estrutura, mas despertar nos pais a percepção de que momentos simples, quando vividos com presença, viram memória. O texto pode falar sobre sair da rotina, desligar um pouco das telas, respirar ar puro, brincar sem pressa e criar histórias que depois serão lembradas com carinho.',l:'Tem passeios que acabam no mesmo dia.\nMas tem experiências que ficam guardadas na memória.\n\nUma cabaninha, um tempo ao ar livre, uma pausa na rotina e a alegria de ver as crianças vivendo algo diferente.\n\nÀs vezes, o melhor presente não é uma coisa.\nÉ um momento vivido junto.'},
-{t:'Seu filho não precisa de muito. Precisa de presença.',d:'Esse tema conversa diretamente com pais que vivem na correria e sentem culpa por não conseguirem estar tão presentes quanto gostariam. A abordagem deve ser sensível, sem pesar demais. A cabaninha entra como cenário de reconexão: um lugar onde a família desacelera, conversa, brinca e se olha com mais calma. O conteúdo funciona bem em Reels com cenas naturais de família, detalhes da cabana, natureza, café da manhã e crianças brincando.',l:'No fim, criança não lembra só do lugar.\nLembra de quem estava junto.\n\nLembra da brincadeira, da risada, do colo, da conversa antes de dormir e daquele dia em que todo mundo parecia ter mais tempo.\n\nAqui, a experiência é simples: desacelerar, brincar e viver junto.'},
-{t:'Uma noite diferente pode mudar a semana inteira.',d:'Aqui a ideia é mostrar que a experiência nas cabaninhas não precisa ser vista apenas como viagem grande ou programação rara. Pode ser uma pausa curta, mas suficiente para renovar a família. O conteúdo pode explorar o antes e depois: a rotina corrida, as crianças agitadas, os pais cansados, e depois o clima de descanso, brincadeira e conexão. É um tema bom para carrossel ou Reels de transformação de rotina.',l:'Às vezes a família não precisa de uma viagem longa.\nPrecisa só de uma pausa de verdade.\n\nUma noite diferente.\nUm lugar acolhedor.\nCrianças brincando.\nPais respirando.\nE a sensação de que a rotina pode ficar mais leve depois de um momento bem vivido.'},
-{t:'Criança feliz não pede luxo. Pede espaço para imaginar.',d:'Esse conteúdo deve valorizar a simplicidade encantadora da cabaninha. Em vez de focar em estrutura sofisticada, a comunicação deve mostrar que o diferencial está no imaginário infantil: dormir em uma cabana, brincar de aventura, criar histórias, explorar o ambiente e sentir que está vivendo algo mágico. O tom deve ser lúdico, familiar e afetivo, mostrando que a experiência toca a criança pela imaginação.',l:'Para uma criança, uma cabaninha nunca é só uma cabaninha.\n\nPode virar castelo.\nAcampamento.\nEsconderijo.\nAventura.\nUm mundo inteiro criado pela imaginação.\n\nE talvez seja por isso que experiências simples marcam tanto.'},
-{t:'O tipo de passeio que aproxima a família sem precisar forçar nada.',d:'A proposta é mostrar que alguns ambientes naturalmente criam conexão. Quando a família sai da rotina, reduz distrações e entra em um espaço mais acolhedor, a conversa acontece, a brincadeira surge e o vínculo aparece sem precisar de grandes planejamentos. O conteúdo pode ser construído com cenas espontâneas e texto leve, reforçando que o lugar facilita momentos reais entre pais e filhos.',l:'Tem lugares que parecem convidar a família a ficar mais perto.\n\nSem pressa.\nSem tela o tempo todo.\nSem aquela correria de todos os dias.\n\nSó o momento acontecendo, as crianças brincando e a família vivendo algo simples, mas cheio de significado.'},
-{t:'A infância passa rápido. As memórias ficam.',d:'Esse é um conteúdo mais emocional, com grande potencial de salvamento e compartilhamento. O texto deve lembrar que a infância é uma fase breve e que muitas vezes os pais estão tão envolvidos na rotina que esquecem de criar pausas significativas. A cabaninha aparece como um convite para viver agora, enquanto a criança ainda se encanta com pequenas aventuras e quer dividir esses momentos com a família.',l:'A infância passa mais rápido do que a gente imagina.\n\nUm dia eles ainda pedem colo.\nAinda se encantam com uma cabaninha.\nAinda querem brincar, correr, imaginar e chamar a gente para viver junto.\n\nPor isso, alguns momentos não deveriam ficar para depois.'},
-{t:'O presente que não ocupa espaço no quarto, mas fica no coração.',d:'Esse tema é ideal para datas comemorativas, aniversários, Dia das Crianças, férias ou fim de semana especial. A proposta é posicionar a experiência como presente afetivo, não como produto. Em vez de comprar mais um brinquedo, os pais podem oferecer uma vivência diferente, com tempo de qualidade, diversão e lembranças. É um conteúdo com potencial comercial, mas com tom emocional e delicado.',l:'Nem todo presente precisa vir embrulhado.\n\nAlguns presentes são vividos.\nSão uma noite diferente, uma brincadeira nova, uma risada em família e uma lembrança que a criança vai guardar com carinho.\n\nPorque tem coisa que não ocupa espaço no quarto.\nMas fica para sempre no coração.'},
-{t:'Férias com gosto de infância de verdade.',d:'Esse conteúdo deve ser pensado para períodos de férias escolares ou recessos. O foco é fugir da ideia de férias apenas como ocupação das crianças. A abordagem deve mostrar férias como tempo de viver experiências, brincar ao ar livre, sair da rotina e criar histórias. Pode funcionar muito bem com imagens de crianças felizes, detalhes naturais, cabaninhas arrumadas e cenas de convivência familiar.',l:'Férias boas não precisam ser complicadas.\n\nÀs vezes, tudo que uma criança precisa é de um lugar diferente, liberdade para brincar, uma cabaninha para imaginar histórias e a família por perto.\n\nFérias com cara de infância.\nDaquelas que a gente lembra com sorriso depois.'},
-{t:'Aqui, a criança brinca e os pais respiram.',d:'Esse tema trabalha uma dor prática dos pais: encontrar um lugar onde as crianças se divirtam e os adultos também consigam relaxar. O conteúdo pode equilibrar desejo e funcionalidade, mostrando que a experiência é boa para todos. A criança vive a aventura; os pais descansam, acompanham, registram e aproveitam sem a pressão de criar uma programação complexa.',l:'Um lugar bom para criança também precisa ser bom para os pais.\n\nAqui, eles brincam, imaginam, se divertem e vivem algo diferente.\nE os adultos conseguem respirar, acompanhar de perto e aproveitar sem tanta correria.\n\nPorque o melhor passeio é aquele em que todo mundo volta mais leve.'},
-{t:'Quando foi a última vez que vocês fizeram algo diferente juntos?',d:'Esse conteúdo usa uma pergunta direta para gerar identificação e reflexão. A ideia é provocar os pais de forma leve: a rotina vai passando, os dias ficam parecidos e, quando percebem, faz tempo que a família não vive uma experiência diferente. A cabaninha entra como resposta simples e possível para quebrar a rotina. É ótimo para post estático, story com enquete ou Reels com narração curta.',l:'Quando foi a última vez que vocês fizeram algo diferente juntos?\n\nNão precisa ser uma grande viagem.\nNão precisa ser algo distante.\nÀs vezes, uma experiência simples já muda o fim de semana inteiro.\n\nUma cabaninha.\nUm tempo em família.\nUma memória nova para guardar.'}
+const temas=[
+{t:'A cabaninha que vira o cantinho mais disputado da festa.',d:'Esse conteúdo deve mostrar que a cabaninha não é apenas um item de decoração. Dentro de uma festa infantil, ela vira cenário, brincadeira, esconderijo, espaço de descanso e ponto de encantamento para as crianças. A abordagem ideal é usar imagens de festas reais, mostrando a cabaninha montada no ambiente, com almofadas, bandeirinhas, tapetes e detalhes do tema. O texto deve reforçar que, quando existe um espaço pensado para elas, as crianças participam mais da festa e criam lembranças de verdade.',l:'Toda festa infantil tem aquele cantinho que chama atenção das crianças.\n\nE quando tem cabaninha, esse cantinho vira cenário de brincadeira, foto, imaginação e muita história.\n\nNão é só decoração.\nÉ um espaço criado para a criança viver a festa do jeitinho dela.'},
+{t:'Cabaninha de dormir: a festa do pijama que sai do básico.',d:'Aqui o foco é um dos serviços que aparece com força no perfil: cabaninha de dormir básica ou completa. O conteúdo deve explicar a diferença de transformar uma noite comum em uma experiência organizada, bonita e segura para receber amigos. A ideia é fugir do genérico “festa do pijama” e mostrar a cena pronta: cabaninhas alinhadas, luzinhas, colchões, almofadas, bandeirinhas e detalhes personalizados. Funciona muito bem com antes e depois da montagem.',l:'Uma noite de pijama pode ser muito mais do que colchões espalhados pela sala.\n\nCom as cabaninhas, tudo ganha clima de festa, cuidado e encantamento.\n\nLuzinhas, almofadas, detalhes personalizados e aquele cenário que faz as crianças entrarem na brincadeira antes mesmo da festa começar.'},
+{t:'Piquenique ao ar livre com cara de festa personalizada.',d:'Esse tema deve aproveitar os conteúdos já vistos no perfil sobre piqueniques em área externa, gramado e parque público. A proposta é mostrar que o piquenique não precisa ser improvisado. Ele pode ter mesa baixa, toalhas, almofadas, cabaninhas, decoração temática e espaço confortável para as crianças. O conteúdo deve vender o desejo de comemorar de um jeito leve, bonito e afetivo, ideal para aniversários, encontros e pequenas celebrações.',l:'Piquenique infantil não precisa ser improviso.\n\nPode ter tema.\nPode ter mesa linda.\nPode ter cabaninha, almofadas, toalhas, detalhes e aquele cenário gostoso para brincar e comemorar ao ar livre.\n\nUma festa leve, afetiva e cheia de charme.'},
+{t:'Espaço kids bonito para as crianças brincarem enquanto os adultos aproveitam.',d:'Esse conteúdo conversa com eventos em que a cabaninha e os elementos infantis funcionam como espaço kids. A dor do público é clara: em festa com adultos, casamento, aniversário ou confraternização, as crianças precisam de um lugar pensado para elas. O texto deve mostrar que o espaço kids pode ser bonito, organizado e integrado à decoração do evento, sem parecer bagunçado ou improvisado.',l:'Em festa com criança, ter um espaço pensado para elas muda tudo.\n\nEnquanto os adultos aproveitam, os pequenos têm um cantinho bonito, confortável e cheio de possibilidades para brincar.\n\nCabaninhas, tapetes, almofadas e detalhes que deixam o evento mais acolhedor para todo mundo.'},
+{t:'Neon Party: quando a festa do pijama ganha energia de baladinha infantil.',d:'O perfil mostra conteúdos de Neon Party, então este tema deve explorar a versão mais divertida e visual da marca. A ideia é apresentar a festa neon como opção para crianças maiores ou para quem quer sair dos temas tradicionais. O texto pode falar sobre luzes, cores, clima de festa, fotos marcantes e a sensação de surpresa quando a criança entra no ambiente montado.',l:'Tem criança que ama uma festa diferente.\n\nA Neon Party transforma a cabaninha em uma experiência cheia de cor, luz e diversão.\n\nÉ festa do pijama, mas com clima de baladinha infantil, cenário marcante e aquele brilho nos olhos quando elas veem tudo pronto.'},
+{t:'Mini Yoga: um momento leve dentro da infância.',d:'Esse conteúdo deve puxar a proposta vista no perfil de mini yoga. A abordagem precisa ser delicada, mostrando que nem toda experiência infantil precisa ser agitada. Algumas atividades podem trazer calma, presença, movimento e conexão. A cabaninha pode entrar como cenário acolhedor para uma vivência diferente, que combina com escolas, eventos, festas e encontros infantis.',l:'Nem toda experiência infantil precisa ser cheia de correria.\n\nÀs vezes, as crianças também precisam de um momento leve, com movimento, respiração, presença e brincadeira tranquila.\n\nO Mini Yoga é uma forma linda de trazer cuidado, conexão e diversão para o universo infantil.'},
+{t:'Ensaio fotográfico com cenário que parece história de criança.',d:'O perfil mostra ensaios fotográficos, por isso este conteúdo deve posicionar as cabaninhas como cenário para fotos afetivas. A ideia é mostrar que, além de festas, as cabaninhas funcionam para registrar fases importantes: aniversário, mesversário, ensaio de família, formatura infantil ou datas especiais. O texto deve destacar que a criança se sente dentro de uma história, deixando as fotos mais naturais e expressivas.',l:'Algumas fotos ficam bonitas.\nOutras guardam uma fase inteira.\n\nCom as cabaninhas, o ensaio ganha cenário, aconchego e um toque de imaginação.\n\nA criança brinca, interage, se sente à vontade… e as fotos acontecem com mais verdade.'},
+{t:'Formatura infantil com cenário lúdico e cheio de afeto.',d:'Como o perfil possui conteúdos de formatura, este tema deve mostrar uma oportunidade específica: usar cabaninhas e elementos lúdicos para criar cenários de formatura infantil. A comunicação deve fugir da rigidez da formatura tradicional e mostrar um momento mais doce, colorido e compatível com a infância. Pode funcionar bem com fotos de criança com beca, letras, blocos, cabaninha ao fundo e composição temática.',l:'Formatura infantil também pode ter leveza, cor e cenário com cara de infância.\n\nA cabaninha cria um fundo lúdico para registrar esse momento especial sem perder a delicadeza da idade.\n\nPorque crescer é lindo, mas continuar criança nesse registro também é.'},
+{t:'Festa pequena também merece cenário bonito.',d:'Esse conteúdo é importante porque fala com mães que talvez não estejam planejando uma grande festa, mas querem fazer algo especial em casa, no salão, no quintal ou em um parque. A abordagem deve mostrar que a Cabaninhas resolve a decoração afetiva de forma prática, levando estrutura, composição e encanto mesmo para celebrações menores. O foco é quebrar a objeção de que cabaninha é só para festa grande.',l:'Não precisa ser uma festa enorme para ser especial.\n\nÀs vezes, uma comemoração pequena, com um cenário bem pensado, já vira uma lembrança linda.\n\nA cabaninha transforma sala, quintal, salão ou parque em um cantinho de celebração com cara de infância.'},
+{t:'O tema da festa pode virar uma experiência, não só uma decoração.',d:'Esse tema deve mostrar a força da personalização. A Cabaninhas pode adaptar o cenário ao tema escolhido: cores, bandeirinhas, almofadas, tapetes, itens de mesa, clima de piquenique, festa do pijama ou espaço kids. O texto deve explicar que decorar é bonito, mas criar uma experiência faz a criança entrar de verdade no universo da festa.',l:'Quando o tema da festa aparece só na mesa, ele decora.\n\nMas quando aparece no espaço onde a criança brinca, deita, imagina e tira fotos, ele vira experiência.\n\nA cabaninha ajuda a transformar o tema em um cantinho vivo dentro da festa.'}
 ];
-const tabs = document.getElementById('tabs');
-const content = document.getElementById('content');
-temas.forEach((item,i)=>{
-  const b=document.createElement('button'); b.className='tab'+(i===0?' active':''); b.textContent='Tema '+(i+1); b.onclick=()=>show(i); tabs.appendChild(b);
-  const s=document.createElement('section'); s.className='panel'+(i===0?' active':'');
-  s.innerHTML=`<div class="number">Tema ${i+1}</div><h2>${item.t}</h2><h3>Descrição detalhada</h3><p>${item.d}</p><h3>Legenda</h3><div class="caption">${item.l}</div>`;
-  content.appendChild(s);
-});
-function show(i){document.querySelectorAll('.tab').forEach((e,k)=>e.classList.toggle('active',k===i));document.querySelectorAll('.panel').forEach((e,k)=>e.classList.toggle('active',k===i));window.scrollTo({top:document.querySelector('.tabs-wrap').offsetTop,behavior:'smooth'});}
-</script>
-</body>
-</html>
+const tabs=document.getElementById('tabs');const content=document.getElementById('content');temas.forEach((item,i)=>{const b=document.createElement('button');b.className='tab'+(i===0?' active':'');b.textContent='Tema '+(i+1);b.onclick=()=>show(i);tabs.appendChild(b);const s=document.createElement('section');s.className='panel'+(i===0?' active':'');s.innerHTML=`<div class="number">Tema ${i+1}</div><h2>${item.t}</h2><h3>Descrição detalhada</h3><p>${item.d}</p><h3>Legenda</h3><div class="caption">${item.l}</div>`;content.appendChild(s)});function show(i){document.querySelectorAll('.tab').forEach((e,k)=>e.classList.toggle('active',k===i));document.querySelectorAll('.panel').forEach((e,k)=>e.classList.toggle('active',k===i));window.scrollTo({top:document.querySelector('.tabs-wrap').offsetTop,behavior:'smooth'})}
+</script></body></html>
