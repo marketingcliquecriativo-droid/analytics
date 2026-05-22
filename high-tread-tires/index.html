@@ -5,19 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>High Tread Tires - Estoque de Pneus</title>
   <style>
-    body{font-family:Arial,sans-serif;margin:0;background:#f5f7fb;color:#111827}header{background:#111827;color:#fff;padding:32px 20px}main{max-width:1100px;margin:24px auto;padding:0 16px}.card{background:#fff;border-radius:16px;box-shadow:0 8px 24px rgba(0,0,0,.08);padding:20px}.top{display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:space-between}input{padding:12px 14px;border:1px solid #d1d5db;border-radius:10px;min-width:260px}.stats{display:flex;gap:12px;flex-wrap:wrap;margin:18px 0}.stat{background:#eef2ff;padding:12px 16px;border-radius:12px;font-weight:700}table{width:100%;border-collapse:collapse;margin-top:12px}th,td{padding:12px;border-bottom:1px solid #e5e7eb;text-align:left}th{background:#f9fafb;font-size:13px;text-transform:uppercase}.low{color:#b91c1c;font-weight:700}.ok{color:#047857;font-weight:700}.price{font-weight:700}.msg{padding:14px;background:#fff7ed;border:1px solid #fed7aa;border-radius:12px;margin:16px 0}a{color:#2563eb}@media(max-width:700px){table{font-size:13px}th,td{padding:8px}input{min-width:100%}}
+    :root{--bg:#050505;--panel:#101010;--panel2:#171717;--red:#ff3b30;--orange:#ff5a00;--text:#fff;--muted:#b8b8b8;--line:#2a2a2a;--ok:#35d07f;--low:#ff4d4d}*{box-sizing:border-box}body{font-family:Arial,Helvetica,sans-serif;margin:0;background:radial-gradient(circle at 50% 0,#222 0,#111 38%,#050505 82%);color:var(--text);min-height:100vh}body:before{content:"";position:fixed;inset:auto 0 0 0;height:42vh;background:repeating-linear-gradient(12deg,rgba(255,255,255,.025) 0 12px,transparent 12px 42px),linear-gradient(180deg,transparent,#000);pointer-events:none}header{padding:34px 18px 26px;background:linear-gradient(180deg,#151515,#080808);border-bottom:1px solid #2b0000;position:relative;overflow:hidden}header:after{content:"";position:absolute;left:-10%;right:-10%;bottom:-26px;height:58px;background:linear-gradient(90deg,transparent,#5a0000,transparent);filter:blur(18px);opacity:.75}.brand{max-width:1160px;margin:0 auto;display:flex;gap:18px;align-items:center}.logoMark{width:78px;height:78px;border-radius:18px;background:#070707;display:grid;place-items:center;border:1px solid #222;box-shadow:0 0 24px rgba(255,59,48,.16)}.logoText{font-weight:900;font-style:italic;letter-spacing:-2px;font-size:21px;line-height:.9}.logoText span{display:block;font-size:11px;letter-spacing:1px}.flame{color:var(--red)}h1{margin:0;font-size:34px;letter-spacing:.5px;text-transform:uppercase}header p{margin:6px 0 0;color:var(--muted);font-size:15px}.badge{display:inline-block;background:var(--orange);color:#fff;padding:2px 8px;border-radius:4px;font-weight:800}main{max-width:1160px;margin:28px auto;padding:0 16px 50px;position:relative}.card{background:linear-gradient(180deg,rgba(23,23,23,.96),rgba(8,8,8,.96));border:1px solid var(--line);border-radius:26px;box-shadow:0 18px 50px rgba(0,0,0,.45);padding:22px;overflow:hidden}.top{display:flex;gap:14px;flex-wrap:wrap;align-items:center;justify-content:space-between}.top h2{margin:0;text-transform:uppercase;letter-spacing:.08em}.tools{display:flex;gap:10px;flex-wrap:wrap}input{padding:14px 16px;border:1px solid #333;border-radius:14px;min-width:300px;background:#0b0b0b;color:#fff;outline:none}input:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(255,59,48,.18)}.stats{display:flex;gap:12px;flex-wrap:wrap;margin:20px 0}.stat{background:#0d0d0d;border:1px solid #262626;padding:13px 16px;border-radius:16px;font-weight:800}.stat span{color:var(--red)}table{width:100%;border-collapse:separate;border-spacing:0;margin-top:12px;overflow:hidden;border-radius:16px}th,td{padding:13px;border-bottom:1px solid #242424;text-align:left}th{background:#0b0b0b;color:#e8e8e8;font-size:12px;text-transform:uppercase;letter-spacing:.08em}td{color:#f1f1f1}.low{color:var(--low);font-weight:900}.ok{color:var(--ok);font-weight:900}.price{font-weight:900;color:#fff}.msg{padding:14px;background:#1d120b;border:1px solid #7a2a00;border-radius:14px;margin:16px 0;color:#ffd9c2}a{color:#ff725c}.footerNote{margin-top:14px;color:#999;font-size:13px}@media(max-width:760px){.brand{align-items:flex-start}.logoMark{width:62px;height:62px}.logoText{font-size:17px}h1{font-size:24px}table{font-size:13px;display:block;overflow-x:auto;white-space:nowrap}th,td{padding:10px}input{min-width:100%;width:100%}.tools{width:100%}}
   </style>
 </head>
 <body>
 <header>
-  <h1>High Tread Tires</h1>
-  <p>Estoque de pneus atualizado pela planilha online Google Sheets</p>
+  <div class="brand">
+    <div class="logoMark"><div class="logoText"><span class="flame">◢</span>HIGH<span>TREAD TIRES</span></div></div>
+    <div><h1>High Tread Tires</h1><p>Finance your <span class="badge">tire purchase</span> and keep your business running smoothly.</p></div>
+  </div>
 </header>
 <main>
   <div class="card">
     <div class="top">
       <h2>Inventário</h2>
-      <input id="search" placeholder="Buscar por nome, medida, SKU..." />
+      <div class="tools"><input id="search" placeholder="Buscar por nome, medida, SKU..." /></div>
     </div>
     <div id="message" class="msg">Carregando estoque da planilha online...</div>
     <div class="stats">
@@ -28,6 +30,7 @@
       <thead><tr><th>Nome</th><th>Medida</th><th>Qtd</th><th>Categoria</th><th>SKU</th><th>Preço</th></tr></thead>
       <tbody id="rows"></tbody>
     </table>
+    <div class="footerNote">Dados sincronizados com a planilha online Google Sheets.</div>
   </div>
 </main>
 <script>
