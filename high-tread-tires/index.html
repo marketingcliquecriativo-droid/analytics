@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>High Tread Tires - Estoque de Pneus</title>
   <style>
-    body{font-family:Arial,sans-serif;margin:0;background:#f5f7fb;color:#111827}header{background:#111827;color:#fff;padding:32px 20px}main{max-width:1100px;margin:24px auto;padding:0 16px}.card{background:#fff;border-radius:16px;box-shadow:0 8px 24px rgba(0,0,0,.08);padding:20px}.top{display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:space-between}input{padding:12px 14px;border:1px solid #d1d5db;border-radius:10px;min-width:260px}.stats{display:flex;gap:12px;flex-wrap:wrap;margin:18px 0}.stat{background:#eef2ff;padding:12px 16px;border-radius:12px;font-weight:700}table{width:100%;border-collapse:collapse;margin-top:12px}th,td{padding:12px;border-bottom:1px solid #e5e7eb;text-align:left}th{background:#f9fafb;font-size:13px;text-transform:uppercase}.low{color:#b91c1c;font-weight:700}.ok{color:#047857;font-weight:700}.price{font-weight:700}.msg{padding:14px;background:#fff7ed;border:1px solid #fed7aa;border-radius:12px;margin:16px 0}@media(max-width:700px){table{font-size:13px}th,td{padding:8px}input{min-width:100%}}
+    body{font-family:Arial,sans-serif;margin:0;background:#f5f7fb;color:#111827}header{background:#111827;color:#fff;padding:32px 20px}main{max-width:1100px;margin:24px auto;padding:0 16px}.card{background:#fff;border-radius:16px;box-shadow:0 8px 24px rgba(0,0,0,.08);padding:20px}.top{display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:space-between}input{padding:12px 14px;border:1px solid #d1d5db;border-radius:10px;min-width:260px}.stats{display:flex;gap:12px;flex-wrap:wrap;margin:18px 0}.stat{background:#eef2ff;padding:12px 16px;border-radius:12px;font-weight:700}table{width:100%;border-collapse:collapse;margin-top:12px}th,td{padding:12px;border-bottom:1px solid #e5e7eb;text-align:left}th{background:#f9fafb;font-size:13px;text-transform:uppercase}.low{color:#b91c1c;font-weight:700}.ok{color:#047857;font-weight:700}.price{font-weight:700}.msg{padding:14px;background:#fff7ed;border:1px solid #fed7aa;border-radius:12px;margin:16px 0}a{color:#2563eb}@media(max-width:700px){table{font-size:13px}th,td{padding:8px}input{min-width:100%}}
   </style>
 </head>
 <body>
 <header>
   <h1>High Tread Tires</h1>
-  <p>Estoque de pneus atualizado pela planilha CSV</p>
+  <p>Estoque de pneus atualizado pela planilha online Google Sheets</p>
 </header>
 <main>
   <div class="card">
@@ -19,7 +19,7 @@
       <h2>Inventário</h2>
       <input id="search" placeholder="Buscar por nome, medida, SKU..." />
     </div>
-    <div id="message" class="msg">Carregando estoque...</div>
+    <div id="message" class="msg">Carregando estoque da planilha online...</div>
     <div class="stats">
       <div class="stat">Itens: <span id="count">0</span></div>
       <div class="stat">Quantidade total: <span id="qty">0</span></div>
@@ -31,11 +31,13 @@
   </div>
 </main>
 <script>
-const CSV_URL='inventory.csv';let inventory=[];
-function parseCSV(text){const lines=text.trim().split(/\r?\n/);const headers=lines.shift().split(',').map(h=>h.trim().replace(/^"|"$/g,''));return lines.map(line=>{const cells=[];let cur='',q=false;for(let i=0;i<line.length;i++){const c=line[i];if(c==='"'&&line[i+1]==='"'){cur+='"';i++;}else if(c==='"'){q=!q;}else if(c===','&&!q){cells.push(cur);cur='';}else cur+=c;}cells.push(cur);let o={};headers.forEach((h,i)=>o[h]=(cells[i]||'').trim());return o;});}
+const SHEET_ID='1n3_oc06VChLdSjTeAlYGhO5hZYwzK007NsWbKC_0T-g';
+const CSV_URL=`https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=Sheet1`;
+let inventory=[];
+function parseCSV(text){const lines=text.trim().split(/\r?\n/);const headers=lines.shift().split(',').map(h=>h.trim().replace(/^"|"$/g,''));return lines.filter(Boolean).map(line=>{const cells=[];let cur='',q=false;for(let i=0;i<line.length;i++){const c=line[i];if(c==='"'&&line[i+1]==='"'){cur+='"';i++;}else if(c==='"'){q=!q;}else if(c===','&&!q){cells.push(cur);cur='';}else cur+=c;}cells.push(cur);let o={};headers.forEach((h,i)=>o[h]=(cells[i]||'').trim());return o;});}
 function money(v){if(!v)return '';const n=Number(String(v).replace(/[^0-9.-]/g,''));return isNaN(n)?v:n.toLocaleString('en-US',{style:'currency',currency:'USD'});}
 function render(){const q=document.getElementById('search').value.toLowerCase();const data=inventory.filter(i=>Object.values(i).join(' ').toLowerCase().includes(q));document.getElementById('count').textContent=data.length;document.getElementById('qty').textContent=data.reduce((s,i)=>s+(Number(i['Qty on Hand']||i.qty||0)||0),0);document.getElementById('rows').innerHTML=data.map(i=>{const qty=Number(i['Qty on Hand']||0)||0;return `<tr><td>${i.Name||''}</td><td>${i['Sales Description']||''}</td><td class="${qty<=0?'low':'ok'}">${qty}</td><td>${i.Category||''}</td><td>${i.SKU||''}</td><td class="price">${money(i.Price||'')}</td></tr>`}).join('');}
-async function load(){try{const r=await fetch(CSV_URL+'?v='+Date.now());if(!r.ok)throw new Error('CSV não encontrado');inventory=parseCSV(await r.text());document.getElementById('message').style.display='none';render();}catch(e){document.getElementById('message').textContent='Erro: coloque o arquivo inventory.csv nesta mesma pasta no GitHub.';}}
+async function load(){try{const r=await fetch(CSV_URL+'&cache='+Date.now());if(!r.ok)throw new Error('Planilha não publicada');inventory=parseCSV(await r.text());document.getElementById('message').style.display='none';render();}catch(e){document.getElementById('message').innerHTML='Não consegui ler a planilha online. Abra a planilha, clique em <b>Compartilhar</b> e deixe como <b>Qualquer pessoa com o link pode visualizar</b>.';}}
 document.getElementById('search').addEventListener('input',render);load();setInterval(load,60000);
 </script>
 </body>
