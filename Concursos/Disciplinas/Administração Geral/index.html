@@ -5,120 +5,49 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Administração Geral</title>
 <style>
-:root{
---bg:#0d1021;
---panel:#181d36;
---accent:#7c4dff;
---text:#f5f6ff;
---muted:#bcc2e2;
---line:#2d335f;
-}
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:linear-gradient(135deg,#0d1021,#25114f);color:var(--text)}
-header{padding:28px 20px;text-align:center;border-bottom:1px solid var(--line)}
-header h1{margin:0;font-size:clamp(30px,5vw,48px)}
-header p{color:var(--muted)}
-.container{max-width:1200px;margin:auto;padding:24px}
-.tabs{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
-.tab-btn{background:var(--panel);border:1px solid var(--line);color:var(--text);padding:12px 18px;border-radius:12px;cursor:pointer;font-weight:700;transition:.2s}
-.tab-btn.active,.tab-btn:hover{background:var(--accent)}
-.tab-content{display:none;background:rgba(24,29,54,.96);border:1px solid var(--line);border-radius:18px;padding:24px;line-height:1.7;box-shadow:0 14px 36px rgba(0,0,0,.25)}
-.tab-content.active{display:block}
-h2,h3{margin-top:0}
-ul{padding-left:22px}
-.highlight{color:#b89cff;font-weight:bold}
-.back{display:inline-block;margin-bottom:20px;color:#fff;text-decoration:none;background:#312067;padding:10px 14px;border-radius:10px}
-</style>
+:root{--bg:#0d1021;--panel:#181d36;--accent:#7c4dff;--text:#f5f6ff;--muted:#bcc2e2;--line:#2d335f;--soft:#23294d}*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:linear-gradient(135deg,#0d1021,#25114f);color:var(--text)}header{padding:28px 20px;text-align:center;border-bottom:1px solid var(--line)}header h1{margin:0;font-size:clamp(30px,5vw,48px)}header p{color:var(--muted)}.container{max-width:1200px;margin:auto;padding:24px}.tabs{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}.tab-btn{background:var(--panel);border:1px solid var(--line);color:var(--text);padding:12px 18px;border-radius:12px;cursor:pointer;font-weight:700;transition:.2s}.tab-btn.active,.tab-btn:hover{background:var(--accent)}.tab-content{display:none;background:rgba(24,29,54,.96);border:1px solid var(--line);border-radius:18px;padding:24px;line-height:1.75;box-shadow:0 14px 36px rgba(0,0,0,.25)}.tab-content.active{display:block}h2,h3{margin-top:0}h3{border-left:4px solid var(--accent);padding-left:10px;margin-top:28px}ul{padding-left:22px}.highlight{color:#b89cff;font-weight:bold}.back{display:inline-block;margin-bottom:20px;color:#fff;text-decoration:none;background:#312067;padding:10px 14px;border-radius:10px}.note{background:var(--soft);border:1px solid var(--line);padding:14px;border-radius:12px;color:var(--muted)}.toc{columns:2}.pill{display:inline-block;background:#2c2460;padding:3px 8px;border-radius:999px;margin:2px}</style>
 </head>
 <body>
-<header>
-<h1>Administração Geral</h1>
-<p>Conteúdo organizado por abas da Aula 01</p>
-</header>
-<div class="container">
-<a class="back" href="../../index.html">← Voltar para Disciplinas</a>
-<div class="tabs">
-<button class="tab-btn active" data-tab="aula1">Aula 01</button>
-<button class="tab-btn" data-tab="taylor">Administração Científica</button>
-<button class="tab-btn" data-tab="fayol">Teoria Clássica</button>
-<button class="tab-btn" data-tab="humanas">Relações Humanas</button>
-</div>
+<header><h1>Administração Geral</h1><p>Conteúdo organizado por abas da Aula 01</p></header>
+<div class="container"><a class="back" href="../../index.html">← Voltar para Disciplinas</a>
+<div class="tabs"><button class="tab-btn active" data-tab="aula1">Aula 01 - Evolução da Administração</button><button class="tab-btn" data-tab="taylor">Administração Científica</button><button class="tab-btn" data-tab="fayol">Teoria Clássica</button><button class="tab-btn" data-tab="humanas">Relações Humanas</button></div>
 <div id="aula1" class="tab-content active">
-<h2>Aula 01 — Evolução da Administração</h2>
-<p>A aula apresenta a evolução das teorias administrativas e mostra como cada abordagem surgiu para resolver limitações da anterior. O conteúdo aborda Administração Científica, Fordismo, Teoria Clássica e Relações Humanas.</p>
-<ul>
-<li><span class="highlight">Taylor</span>: foco em tarefas, produtividade e eficiência.</li>
-<li><span class="highlight">Fayol</span>: foco na estrutura organizacional.</li>
-<li><span class="highlight">Elton Mayo</span>: foco nas pessoas e relações humanas.</li>
-</ul>
+<h2>Aula 01 — Evolução da Administração e Principais Abordagens</h2>
+<p class="note">Resumo completo para prova, mantendo os conceitos relevantes do PDF e retirando apenas exemplos longos, saudações, anúncios, repetições e questões comentadas repetitivas.</p>
+<h3>Visão geral das teorias</h3><p>Não existe teoria administrativa absolutamente certa ou errada. Cada teoria enxerga a Administração por um prisma específico e fornece alternativas ao administrador. Em concursos, é essencial saber a <strong>ênfase</strong>, os <strong>autores</strong>, os <strong>conceitos-chave</strong>, as <strong>críticas</strong> e as <strong>diferenças</strong> entre as abordagens.</p>
+<p><span class="pill">Taylor: tarefas</span><span class="pill">Fayol: estrutura</span><span class="pill">Mayo: pessoas</span><span class="pill">Weber: burocracia</span><span class="pill">Estruturalista: organização + ambiente</span><span class="pill">Neoclássica: prática/resultados</span><span class="pill">Comportamental: comportamento/decisão</span><span class="pill">DO: mudança planejada</span><span class="pill">Sistemas: organização aberta</span><span class="pill">Contingência: depende da situação</span></p>
+<h3>1. Administração Científica — Taylor</h3><p>Desenvolvida por Frederick Taylor entre o fim do século XIX e início do século XX. Nasceu no chão de fábrica, observando que operários aprendiam por imitação, sem uniformidade de métodos, e que a gerência desconhecia rotinas e tempos necessários às atividades. Seu objetivo era eliminar desperdícios e aumentar produtividade por meio de métodos científicos.</p><ul><li><strong>Ênfase:</strong> tarefas.</li><li><strong>Objetivo:</strong> eficiência e produtividade.</li><li><strong>Ideia central:</strong> descobrir a melhor maneira de executar cada tarefa — <em>the best way</em>.</li><li><strong>Ferramenta central:</strong> estudo dos tempos e movimentos, com cronometragem, eliminação de movimentos inúteis, racionalização dos movimentos úteis e criação de tempo padrão.</li><li><strong>Organização Racional do Trabalho (ORT):</strong> substituição de métodos empíricos, rudimentares e improvisados por métodos científicos.</li></ul>
+<h3>Fundamentos da ORT</h3><ul><li><strong>Análise do trabalho e estudo dos tempos e movimentos:</strong> busca da melhor maneira de fazer a atividade e definição do tempo padrão.</li><li><strong>Estudo da fadiga humana:</strong> a fadiga reduz eficiência, produtividade e qualidade; devem ser eliminados movimentos que geram fadiga ou não se relacionam diretamente à tarefa.</li><li><strong>Divisão do trabalho e especialização do operário:</strong> cada trabalhador executa tarefas específicas para elevar a produtividade individual e facilitar treinamento.</li><li><strong>Desenho de cargos e tarefas:</strong> definição racional do que cada operário faz e como faz.</li><li><strong>Incentivos salariais e prêmios de produção:</strong> remuneração por produtividade; quem produz mais ganha mais.</li><li><strong>Homo economicus:</strong> o homem é motivado principalmente pelo dinheiro.</li><li><strong>Condições ambientais de trabalho:</strong> iluminação, conforto e condições físicas são ajustadas para reduzir fadiga e aumentar eficiência, não por preocupação humanista principal.</li><li><strong>Padronização de métodos e máquinas:</strong> aumenta uniformidade, reduz desperdícios e melhora eficiência.</li><li><strong>Supervisão funcional:</strong> vários supervisores especializados dão ordens ao operário em suas áreas; Taylor se opunha à centralização absoluta da autoridade.</li></ul>
+<h3>Princípios de Taylor — PPCE</h3><ul><li><strong>Planejamento:</strong> substituir improvisação por métodos científicos planejados.</li><li><strong>Preparo:</strong> selecionar trabalhadores cientificamente conforme aptidões e treiná-los para produzir da melhor maneira.</li><li><strong>Controle:</strong> verificar se o trabalho ocorre conforme métodos definidos e se metas são atingidas.</li><li><strong>Execução:</strong> distribuir responsabilidades e atribuições para execução organizada e disciplinada.</li></ul>
+<h3>Características e críticas à Administração Científica</h3><ul><li>Organização vista como <strong>sistema fechado</strong>, sem considerar influências externas.</li><li>Busca de máxima prosperidade para patrão e empregado, com identidade de interesses.</li><li><strong>Mecanicismo:</strong> organização como máquina e trabalhador como peça.</li><li><strong>Superespecialização:</strong> tarefas simples e repetitivas, gerando monotonia e insatisfação.</li><li><strong>Visão microscópica do homem:</strong> ignora o trabalhador como ser humano e social.</li><li><strong>Ausência de comprovação científica:</strong> métodos baseados em observações concretas e singulares, sem comprovação ampla.</li><li><strong>Abordagem incompleta:</strong> considera aspectos formais, ignora organização informal e fatores humanos.</li><li><strong>Limitação do campo de aplicação:</strong> foco no chão de fábrica.</li><li><strong>Abordagem prescritiva e normativa:</strong> receitas de aplicação padronizada.</li><li><strong>Sistema fechado:</strong> ignora ambiente externo.</li></ul>
+<h3>2. Fordismo</h3><p>Não é teoria administrativa, mas modelo de produção baseado em Taylor. Henry Ford promoveu a produção em massa, com máxima qualidade e padronização, menor custo possível e linha de montagem móvel.</p><ul><li><strong>Produção em massa:</strong> alto volume, padronização e redução de custos.</li><li><strong>Linha de montagem móvel:</strong> uso de esteiras; o produto vai até o operário.</li><li><strong>Especialização extrema:</strong> cada operário executa uma parte específica.</li><li><strong>Intensificação:</strong> reduzir tempo de produção com uso máximo e imediato de equipamentos e matérias-primas.</li><li><strong>Economicidade:</strong> reduzir estoques ao mínimo e acelerar giro financeiro.</li><li><strong>Produtividade:</strong> aumentar produção por trabalhador no mesmo período, via especialização e linha de montagem.</li></ul>
+<h3>3. Teoria Clássica — Fayol</h3><p>Fundada por Henri Fayol, na França, em 1916. Também buscava eficiência, mas com foco diferente de Taylor: em vez de tarefas, enfatizava a <strong>estrutura organizacional</strong>, a disposição dos órgãos e departamentos e sua inter-relação. Tem abordagem global, anatômica, estrutural e sintética.</p><ul><li><strong>Abordagem Clássica:</strong> gênero que engloba Administração Científica e Teoria Clássica.</li><li><strong>Teoria Clássica em sentido estrito:</strong> Fayol.</li><li><strong>Atenção para CEBRASPE/CESPE:</strong> às vezes usa “Teoria Clássica” como sinônimo amplo de abordagem clássica, incluindo Taylor e Fayol.</li></ul>
+<h3>Funções básicas da organização segundo Fayol</h3><ul><li><strong>Técnicas:</strong> produção de bens e serviços.</li><li><strong>Comerciais:</strong> compra, venda e permuta.</li><li><strong>Financeiras:</strong> captação e gestão de recursos financeiros.</li><li><strong>Segurança:</strong> proteção de bens e pessoas.</li><li><strong>Contábeis:</strong> balanços, custos, inventários e registros.</li><li><strong>Administrativas:</strong> integração, coordenação e sincronização das demais funções.</li></ul>
+<h3>Funções administrativas de Fayol — POC3</h3><ul><li><strong>Prever:</strong> visualizar o futuro e traçar programa de ação.</li><li><strong>Organizar:</strong> construir o duplo organismo material e social da empresa.</li><li><strong>Comandar:</strong> dirigir e orientar o pessoal.</li><li><strong>Coordenar:</strong> ligar, unir e harmonizar atos e esforços coletivos.</li><li><strong>Controlar:</strong> certificar-se de que tudo ocorra conforme regras e ordens.</li></ul>
+<h3>14 princípios gerais de Fayol</h3><ul><li><strong>Divisão do trabalho:</strong> especialização de tarefas e pessoas; pode ser vertical ou horizontal.</li><li><strong>Autoridade e responsabilidade:</strong> direito de dar ordens e dever de prestar contas; devem estar equilibradas.</li><li><strong>Disciplina:</strong> obediência, aplicação, energia, comportamento e respeito aos acordos.</li><li><strong>Unidade de comando:</strong> cada empregado recebe ordens de apenas um superior.</li><li><strong>Unidade de direção:</strong> uma cabeça e um plano para atividades com mesmo objetivo.</li><li><strong>Subordinação dos interesses individuais aos gerais:</strong> interesse da empresa prevalece sobre interesses particulares.</li><li><strong>Remuneração do pessoal:</strong> satisfação justa e garantida para empregados e organização.</li><li><strong>Centralização:</strong> concentração da autoridade no topo.</li><li><strong>Cadeia escalar:</strong> linha de autoridade do nível mais alto ao mais baixo.</li><li><strong>Ordem:</strong> um lugar para cada coisa e cada coisa em seu lugar; ordem material e humana.</li><li><strong>Equidade:</strong> amabilidade e justiça para alcançar lealdade.</li><li><strong>Estabilidade do pessoal:</strong> rotatividade prejudica eficiência.</li><li><strong>Iniciativa:</strong> capacidade de visualizar plano e assegurar seu sucesso.</li><li><strong>Espírito de equipe:</strong> harmonia e união fortalecem a organização.</li></ul>
+<h3>Taylor x Fayol</h3><ul><li><strong>Semelhanças:</strong> eficiência, abordagem prescritiva/normativa, sistema fechado, homo economicus.</li><li><strong>Taylor:</strong> tarefas, supervisão funcional, abordagem analítica, chão de fábrica, pouca preocupação com aspectos humanos.</li><li><strong>Fayol:</strong> estrutura, unidade de comando, abordagem sintética/global, organização como todo; reconhece problemas humanos, mas não dá tratamento adequado.</li></ul>
+<h3>Críticas à Teoria Clássica</h3><ul><li><strong>Abordagem simplificada da organização formal:</strong> ignora conteúdo psicológico e social.</li><li><strong>Ausência de trabalhos experimentais:</strong> princípios baseados em observação e senso comum.</li><li><strong>Extremo racionalismo:</strong> excesso de formalismo e lógica, com superficialidade e pouca realidade.</li><li><strong>Teoria da máquina:</strong> organização como mecanismo de relações previsíveis.</li><li><strong>Abordagem incompleta:</strong> não considera organização informal.</li><li><strong>Sistema fechado:</strong> ignora ambiente externo.</li></ul>
+<h3>4. Teoria das Relações Humanas — Elton Mayo</h3><p>Surgiu nos Estados Unidos como reação à Teoria Clássica, baseada na Experiência de Hawthorne, realizada na Western Electric, em Chicago. O objetivo inicial era estudar a influência da luminosidade na produtividade, mas concluiu-se que o aumento de produtividade se relacionava à atenção dada aos empregados e aos fatores psicológicos, não diretamente à luz.</p><ul><li><strong>Ênfase:</strong> pessoas e aspectos psicológicos.</li><li><strong>Conceitos valorizados:</strong> liderança, motivação, comunicação, organização informal, relações humanas.</li><li><strong>Homo social:</strong> pessoas são motivadas por aprovação social, reconhecimento, recompensas simbólicas e integração social; dinheiro passa a ser secundário.</li><li><strong>Identidade de interesses:</strong> deve haver mediação entre interesses pessoais e organizacionais.</li></ul>
+<h3>Conclusões de Hawthorne</h3><ul><li><strong>Nível de produção resulta da integração social:</strong> produtividade depende da integração, normas sociais e expectativas do grupo.</li><li><strong>Comportamento social dos empregados:</strong> trabalhadores agem como membros de grupos, não isoladamente.</li><li><strong>Grupos informais:</strong> relações pessoais e afinidades criam grupos não previstos no organograma, com regras, crenças e objetivos próprios.</li><li><strong>Relações humanas:</strong> interações sociais influenciam comportamento e desempenho.</li><li><strong>Importância do conteúdo do cargo:</strong> trabalhos menos repetitivos e com melhor conteúdo elevam moral e produtividade.</li><li><strong>Ênfase nos aspectos emocionais:</strong> fatores emocionais e irracionais influenciam o comportamento.</li></ul>
+<h3>Teoria Clássica x Relações Humanas</h3><ul><li><strong>Clássica:</strong> organização formal, autoridade, racionalização, homo economicus, tarefa/estrutura, sistema fechado, incentivos materiais.</li><li><strong>Relações Humanas:</strong> organização informal, liderança, motivação, comunicação, homo social, pessoas, grupos sociais, recompensas simbólicas.</li></ul>
+<h3>Críticas às Relações Humanas</h3><ul><li>Oposição exagerada à Teoria Clássica.</li><li>Visão romântica e ingênua do trabalhador.</li><li>Ênfase excessiva nos grupos informais.</li><li>Limitação experimental.</li><li>Parcialidade das conclusões.</li><li>Pouca preocupação com estrutura, tecnologia e ambiente externo.</li></ul>
+<h3>5. Teoria da Burocracia — Max Weber</h3><p>A burocracia surge como modelo racional-legal para organizar atividades humanas de forma previsível, formal e eficiente. Para Weber, a burocracia é baseada na autoridade racional-legal, nas normas e na impessoalidade.</p><ul><li><strong>Formalidade:</strong> regras, normas e comunicação escrita.</li><li><strong>Impessoalidade:</strong> decisões baseadas em cargos, normas e competências, não em preferências pessoais.</li><li><strong>Profissionalismo:</strong> cargos ocupados por especialistas remunerados e selecionados por competência.</li><li><strong>Hierarquia de autoridade:</strong> cargos organizados em níveis de subordinação.</li><li><strong>Divisão do trabalho:</strong> funções e responsabilidades definidas.</li><li><strong>Competência técnica e meritocracia:</strong> seleção e promoção baseadas em critérios técnicos.</li><li><strong>Separação entre propriedade e administração:</strong> administrador não é dono dos meios da organização.</li><li><strong>Rotinas e procedimentos padronizados:</strong> previsibilidade e uniformidade.</li></ul>
+<h3>Vantagens da burocracia</h3><ul><li>Racionalidade.</li><li>Precisão na definição de cargos e operações.</li><li>Rapidez nas decisões quando normas são conhecidas.</li><li>Univocidade de interpretação.</li><li>Uniformidade de rotinas.</li><li>Continuidade da organização.</li><li>Redução de conflitos interpessoais.</li><li>Constância e confiabilidade.</li><li>Benefícios para pessoas, pela hierarquia formalizada e regras claras.</li></ul>
+<h3>Disfunções/críticas da burocracia</h3><ul><li><strong>Internalização das regras:</strong> normas viram fins em si mesmas.</li><li><strong>Excesso de formalismo e papelório.</strong></li><li><strong>Resistência a mudanças.</strong></li><li><strong>Despersonalização do relacionamento.</strong></li><li><strong>Categorização como base do processo decisório:</strong> decisões dependem do cargo, não da capacidade real.</li><li><strong>Superconformidade às rotinas.</strong></li><li><strong>Exibição de sinais de autoridade.</strong></li><li><strong>Dificuldade no atendimento ao público:</strong> foco interno e não no cidadão/cliente.</li></ul>
+<h3>6. Teoria Estruturalista</h3><p>Surgiu como desdobramento da Teoria da Burocracia e tentativa de conciliar Teoria Clássica e Relações Humanas. Analisa a organização como unidade social complexa, com estrutura formal e informal, conflitos, ambiente e múltiplos tipos de organização.</p><ul><li><strong>Ênfase:</strong> estrutura e ambiente.</li><li><strong>Homem organizacional:</strong> indivíduo que participa de várias organizações e precisa ser flexível, tolerante a frustrações, capaz de adiar recompensas e desejar realização.</li><li><strong>Organizações formais e informais:</strong> ambas influenciam o comportamento.</li><li><strong>Conflitos:</strong> são inevitáveis e podem gerar mudanças e inovação.</li><li><strong>Incentivos mistos:</strong> materiais e sociais.</li><li><strong>Análise interorganizacional:</strong> considera relações entre organizações e ambiente.</li></ul>
+<h3>Clássica x Relações Humanas x Estruturalista</h3><ul><li><strong>Clássica:</strong> formal, racional, estrutura/tarefas, homem econômico.</li><li><strong>Relações Humanas:</strong> informal, social, pessoas, homem social.</li><li><strong>Estruturalista:</strong> formal + informal, estrutura + ambiente, homem organizacional, conflitos e incentivos mistos.</li></ul>
+<h3>7. Teoria Neoclássica</h3><p>Retoma conceitos clássicos com atualização, pragmatismo e foco em resultados. É uma teoria eclética, prática e orientada por objetivos.</p><ul><li><strong>Ênfase na prática administrativa:</strong> utilidade e aplicação.</li><li><strong>Reafirmação dos postulados clássicos:</strong> estrutura, autoridade, responsabilidade e funções administrativas permanecem importantes.</li><li><strong>Princípios gerais de administração:</strong> usados com flexibilidade, não como leis rígidas.</li><li><strong>Ênfase nos objetivos e resultados:</strong> organizações existem para alcançar objetivos.</li><li><strong>Ecletismo:</strong> aproveita contribuições de diversas teorias.</li><li><strong>Processo administrativo moderno:</strong> planejamento, organização, direção e controle.</li><li><strong>Eficiência x eficácia:</strong> eficiência é fazer bem os meios/recursos; eficácia é alcançar resultados/objetivos.</li><li><strong>Administração por Objetivos (APO):</strong> objetivos definidos em conjunto, desdobrados por níveis, com avaliação de desempenho e foco em resultados.</li></ul>
+<h3>8. Teoria Comportamental</h3><p>Também chamada behaviorista, aprofunda o estudo do comportamento humano nas organizações, superando a visão simplificada do homem econômico e do homem social. Valoriza motivação, decisão, liderança, comunicação e dinâmica organizacional.</p><ul><li><strong>Ênfase:</strong> comportamento organizacional e processos decisórios.</li><li><strong>Homem administrativo:</strong> toma decisões com racionalidade limitada e busca soluções satisfatórias, não necessariamente ótimas.</li><li><strong>Motivação:</strong> necessidades humanas orientam comportamento.</li><li><strong>Processo decisório:</strong> organização é sistema de decisões.</li><li><strong>Autores associados:</strong> Herbert Simon, McGregor, Maslow, Herzberg, Likert, entre outros.</li><li><strong>Conflito entre objetivos individuais e organizacionais:</strong> deve ser administrado.</li></ul>
+<h3>9. Teoria do Desenvolvimento Organizacional — DO</h3><p>É uma abordagem voltada à mudança organizacional planejada e ao desenvolvimento das pessoas e da organização. Tem influência das ciências comportamentais.</p><ul><li><strong>Ênfase:</strong> mudança planejada, cultura organizacional, clima organizacional e desenvolvimento humano.</li><li><strong>Objetivo:</strong> aumentar eficácia organizacional e capacidade de adaptação.</li><li><strong>Cultura organizacional:</strong> valores, crenças, hábitos e normas compartilhadas.</li><li><strong>Clima organizacional:</strong> percepção do ambiente interno pelos membros.</li><li><strong>Mudança organizacional:</strong> processo planejado para ajustar organização às demandas internas e externas.</li><li><strong>Agente de mudança:</strong> pessoa ou grupo que conduz intervenções.</li><li><strong>Intervenções de DO:</strong> treinamento de sensibilidade, desenvolvimento de equipes, consultoria de processos, feedback de dados e solução de conflitos.</li></ul>
+<h3>10. Teoria dos Sistemas</h3><p>Baseada na Teoria Geral dos Sistemas. A organização passa a ser vista como sistema aberto, composto por partes interdependentes que interagem entre si e com o ambiente.</p><ul><li><strong>Sistema:</strong> conjunto de elementos interdependentes orientados a objetivos.</li><li><strong>Sistema aberto:</strong> troca energia, informação e recursos com o ambiente.</li><li><strong>Entrada/input:</strong> recursos, informações, pessoas, materiais.</li><li><strong>Processamento/throughput:</strong> transformação dos insumos.</li><li><strong>Saída/output:</strong> produtos, serviços, resultados.</li><li><strong>Feedback:</strong> retorno de informações para corrigir ou melhorar o sistema.</li><li><strong>Ambiente:</strong> contexto externo que influencia e é influenciado pela organização.</li><li><strong>Homeostase:</strong> equilíbrio dinâmico.</li><li><strong>Entropia:</strong> tendência à desorganização e desgaste.</li><li><strong>Entropia negativa:</strong> capacidade de importar energia/informação para evitar deterioração.</li><li><strong>Sinergia:</strong> resultado do todo maior que a soma das partes.</li><li><strong>Equifinalidade:</strong> diferentes caminhos podem levar ao mesmo resultado.</li><li><strong>Diferenciação:</strong> partes do sistema se especializam.</li><li><strong>Globalismo/totalidade:</strong> alteração em uma parte afeta o todo.</li></ul>
+<h3>11. Teoria da Contingência</h3><p>Afirma que não existe uma única melhor maneira de administrar. A melhor solução depende das circunstâncias. A organização deve ajustar estrutura, tecnologia, estratégia e pessoas ao ambiente.</p><ul><li><strong>Ênfase:</strong> ambiente e tecnologia.</li><li><strong>Ideia central:</strong> tudo depende; não há receita universal.</li><li><strong>Ambiente:</strong> pode ser estável ou instável, simples ou complexo.</li><li><strong>Tecnologia:</strong> condiciona estrutura e funcionamento organizacional.</li><li><strong>Adaptação:</strong> organizações eficazes ajustam-se ao contexto.</li><li><strong>Estrutura mecanística:</strong> adequada a ambientes estáveis; hierarquia rígida, centralização, regras e tarefas definidas.</li><li><strong>Estrutura orgânica:</strong> adequada a ambientes instáveis; flexibilidade, descentralização, comunicação lateral e inovação.</li><li><strong>Fit/ajustamento:</strong> desempenho depende da compatibilidade entre variáveis internas e externas.</li></ul>
+<h3>Críticas à Contingência</h3><ul><li>Pode parecer relativista demais.</li><li>Dificulta a formulação de princípios gerais.</li><li>Exige diagnóstico complexo do ambiente e das variáveis internas.</li><li>Nem sempre indica claramente qual solução aplicar.</li></ul>
+<h3>Resumo comparativo final para prova</h3><ul><li><strong>Administração Científica:</strong> Taylor; tarefas; tempos e movimentos; ORT; homo economicus; supervisão funcional; sistema fechado.</li><li><strong>Fordismo:</strong> produção em massa; linha de montagem; intensificação, economicidade e produtividade.</li><li><strong>Teoria Clássica:</strong> Fayol; estrutura; funções administrativas; 14 princípios; unidade de comando; sistema fechado.</li><li><strong>Relações Humanas:</strong> Elton Mayo; pessoas; Hawthorne; homo social; grupos informais; motivação e liderança.</li><li><strong>Burocracia:</strong> Weber; racional-legal; formalidade, impessoalidade e profissionalismo; disfunções burocráticas.</li><li><strong>Estruturalista:</strong> organização formal e informal; conflitos; ambiente; homem organizacional.</li><li><strong>Neoclássica:</strong> pragmatismo; objetivos/resultados; PODC; eficiência e eficácia; APO.</li><li><strong>Comportamental:</strong> comportamento; decisão; motivação; homem administrativo; racionalidade limitada.</li><li><strong>DO:</strong> mudança planejada; cultura; clima; desenvolvimento e intervenções.</li><li><strong>Sistemas:</strong> sistema aberto; inputs, processamento, outputs e feedback; sinergia, entropia e equifinalidade.</li><li><strong>Contingência:</strong> depende da situação; ambiente e tecnologia; estruturas mecanísticas e orgânicas.</li></ul>
 </div>
-<div id="taylor" class="tab-content">
-<h2>Administração Científica — Taylor</h2>
-<p>Frederick Taylor desenvolveu a Administração Científica com objetivo de aumentar produtividade por meio de métodos científicos.</p>
-<h3>Principais pontos</h3>
-<ul>
-<li>Estudo dos tempos e movimentos.</li>
-<li>Organização Racional do Trabalho (ORT).</li>
-<li>Padronização de métodos.</li>
-<li>Especialização do trabalhador.</li>
-<li>Homo economicus.</li>
-<li>Supervisão funcional.</li>
-</ul>
-<h3>Críticas</h3>
-<ul>
-<li>Visão mecanicista.</li>
-<li>Superespecialização.</li>
-<li>Sistema fechado.</li>
-<li>Pouca atenção aos fatores humanos.</li>
-</ul>
+<div id="taylor" class="tab-content"><h2>Administração Científica — Taylor</h2><p>Frederick Taylor desenvolveu a Administração Científica com objetivo de aumentar produtividade por meio de métodos científicos, estudo dos tempos e movimentos, ORT, especialização, padronização, incentivos salariais, homo economicus e supervisão funcional.</p></div>
+<div id="fayol" class="tab-content"><h2>Teoria Clássica — Fayol</h2><p>Henri Fayol concentrou seus estudos na estrutura organizacional, nas funções básicas da empresa, nas funções administrativas POC3 e nos 14 princípios gerais da Administração.</p></div>
+<div id="humanas" class="tab-content"><h2>Teoria das Relações Humanas</h2><p>Elton Mayo e a Experiência de Hawthorne deslocaram o foco para pessoas, motivação, grupos informais, comunicação, liderança, homo social e integração social.</p></div>
 </div>
-<div id="fayol" class="tab-content">
-<h2>Teoria Clássica — Fayol</h2>
-<p>Henri Fayol concentrou seus estudos na estrutura organizacional e nas funções administrativas.</p>
-<h3>Funções administrativas</h3>
-<ul>
-<li>Prever</li>
-<li>Organizar</li>
-<li>Comandar</li>
-<li>Coordenar</li>
-<li>Controlar</li>
-</ul>
-<h3>Princípios</h3>
-<ul>
-<li>Divisão do trabalho</li>
-<li>Autoridade e responsabilidade</li>
-<li>Unidade de comando</li>
-<li>Centralização</li>
-<li>Equidade</li>
-<li>Espírito de equipe</li>
-</ul>
-</div>
-<div id="humanas" class="tab-content">
-<h2>Teoria das Relações Humanas</h2>
-<p>Desenvolvida por Elton Mayo a partir da Experiência de Hawthorne.</p>
-<h3>Conclusões</h3>
-<ul>
-<li>Produtividade depende da integração social.</li>
-<li>Existência de grupos informais.</li>
-<li>Ênfase nos fatores psicológicos.</li>
-<li>Motivação além do dinheiro.</li>
-<li>Importância das relações humanas.</li>
-</ul>
-<h3>Conceito central</h3>
-<p>O trabalhador passou a ser visto como <span class="highlight">homem social</span>.</p>
-</div>
-</div>
-<script>
-const buttons=document.querySelectorAll('.tab-btn');
-const tabs=document.querySelectorAll('.tab-content');
-buttons.forEach(btn=>{
-btn.addEventListener('click',()=>{
-buttons.forEach(b=>b.classList.remove('active'));
-tabs.forEach(t=>t.classList.remove('active'));
-btn.classList.add('active');
-document.getElementById(btn.dataset.tab).classList.add('active');
-});
-});
-</script>
+<script>const buttons=document.querySelectorAll('.tab-btn');const tabs=document.querySelectorAll('.tab-content');buttons.forEach(btn=>{btn.addEventListener('click',()=>{buttons.forEach(b=>b.classList.remove('active'));tabs.forEach(t=>t.classList.remove('active'));btn.classList.add('active');document.getElementById(btn.dataset.tab).classList.add('active');});});</script>
 </body>
 </html>
