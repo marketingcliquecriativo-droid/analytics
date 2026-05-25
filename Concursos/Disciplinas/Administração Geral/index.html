@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Administração Geral</title>
+<style>
+:root{
+--bg:#0d1021;
+--panel:#181d36;
+--accent:#7c4dff;
+--text:#f5f6ff;
+--muted:#bcc2e2;
+--line:#2d335f;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:linear-gradient(135deg,#0d1021,#25114f);color:var(--text)}
+header{padding:28px 20px;text-align:center;border-bottom:1px solid var(--line)}
+header h1{margin:0;font-size:clamp(30px,5vw,48px)}
+header p{color:var(--muted)}
+.container{max-width:1200px;margin:auto;padding:24px}
+.tabs{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+.tab-btn{background:var(--panel);border:1px solid var(--line);color:var(--text);padding:12px 18px;border-radius:12px;cursor:pointer;font-weight:700;transition:.2s}
+.tab-btn.active,.tab-btn:hover{background:var(--accent)}
+.tab-content{display:none;background:rgba(24,29,54,.96);border:1px solid var(--line);border-radius:18px;padding:24px;line-height:1.7;box-shadow:0 14px 36px rgba(0,0,0,.25)}
+.tab-content.active{display:block}
+h2,h3{margin-top:0}
+ul{padding-left:22px}
+.highlight{color:#b89cff;font-weight:bold}
+.back{display:inline-block;margin-bottom:20px;color:#fff;text-decoration:none;background:#312067;padding:10px 14px;border-radius:10px}
+</style>
+</head>
+<body>
+<header>
+<h1>Administração Geral</h1>
+<p>Conteúdo organizado por abas da Aula 01</p>
+</header>
+<div class="container">
+<a class="back" href="../../index.html">← Voltar para Disciplinas</a>
+<div class="tabs">
+<button class="tab-btn active" data-tab="aula1">Aula 01</button>
+<button class="tab-btn" data-tab="taylor">Administração Científica</button>
+<button class="tab-btn" data-tab="fayol">Teoria Clássica</button>
+<button class="tab-btn" data-tab="humanas">Relações Humanas</button>
+</div>
+<div id="aula1" class="tab-content active">
+<h2>Aula 01 — Evolução da Administração</h2>
+<p>A aula apresenta a evolução das teorias administrativas e mostra como cada abordagem surgiu para resolver limitações da anterior. O conteúdo aborda Administração Científica, Fordismo, Teoria Clássica e Relações Humanas.</p>
+<ul>
+<li><span class="highlight">Taylor</span>: foco em tarefas, produtividade e eficiência.</li>
+<li><span class="highlight">Fayol</span>: foco na estrutura organizacional.</li>
+<li><span class="highlight">Elton Mayo</span>: foco nas pessoas e relações humanas.</li>
+</ul>
+</div>
+<div id="taylor" class="tab-content">
+<h2>Administração Científica — Taylor</h2>
+<p>Frederick Taylor desenvolveu a Administração Científica com objetivo de aumentar produtividade por meio de métodos científicos.</p>
+<h3>Principais pontos</h3>
+<ul>
+<li>Estudo dos tempos e movimentos.</li>
+<li>Organização Racional do Trabalho (ORT).</li>
+<li>Padronização de métodos.</li>
+<li>Especialização do trabalhador.</li>
+<li>Homo economicus.</li>
+<li>Supervisão funcional.</li>
+</ul>
+<h3>Críticas</h3>
+<ul>
+<li>Visão mecanicista.</li>
+<li>Superespecialização.</li>
+<li>Sistema fechado.</li>
+<li>Pouca atenção aos fatores humanos.</li>
+</ul>
+</div>
+<div id="fayol" class="tab-content">
+<h2>Teoria Clássica — Fayol</h2>
+<p>Henri Fayol concentrou seus estudos na estrutura organizacional e nas funções administrativas.</p>
+<h3>Funções administrativas</h3>
+<ul>
+<li>Prever</li>
+<li>Organizar</li>
+<li>Comandar</li>
+<li>Coordenar</li>
+<li>Controlar</li>
+</ul>
+<h3>Princípios</h3>
+<ul>
+<li>Divisão do trabalho</li>
+<li>Autoridade e responsabilidade</li>
+<li>Unidade de comando</li>
+<li>Centralização</li>
+<li>Equidade</li>
+<li>Espírito de equipe</li>
+</ul>
+</div>
+<div id="humanas" class="tab-content">
+<h2>Teoria das Relações Humanas</h2>
+<p>Desenvolvida por Elton Mayo a partir da Experiência de Hawthorne.</p>
+<h3>Conclusões</h3>
+<ul>
+<li>Produtividade depende da integração social.</li>
+<li>Existência de grupos informais.</li>
+<li>Ênfase nos fatores psicológicos.</li>
+<li>Motivação além do dinheiro.</li>
+<li>Importância das relações humanas.</li>
+</ul>
+<h3>Conceito central</h3>
+<p>O trabalhador passou a ser visto como <span class="highlight">homem social</span>.</p>
+</div>
+</div>
+<script>
+const buttons=document.querySelectorAll('.tab-btn');
+const tabs=document.querySelectorAll('.tab-content');
+buttons.forEach(btn=>{
+btn.addEventListener('click',()=>{
+buttons.forEach(b=>b.classList.remove('active'));
+tabs.forEach(t=>t.classList.remove('active'));
+btn.classList.add('active');
+document.getElementById(btn.dataset.tab).classList.add('active');
+});
+});
+</script>
+</body>
+</html>
