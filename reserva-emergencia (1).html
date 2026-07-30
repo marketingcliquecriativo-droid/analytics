@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Calcule sua Reserva de Emergência</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-950:#081b3a;
+    --navy-900:#0b2244;
+    --navy-800:#0f2c58;
+    --blue-500:#2e6ff2;
+    --blue-400:#5b8bf7;
+    --ice:#ffffff;
+    --field-bg:#eef2f9;
+    --field-bg-active:#e2eaf9;
+    --slate-600:#4a5a78;
+    --slate-400:#8593ac;
+    --hairline:rgba(255,255,255,0.10);
+    --hairline-dark:rgba(11,34,68,0.08);
+    --radius-lg:20px;
+    --radius-md:14px;
+    --radius-sm:10px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--navy-950);
+    color:var(--ice);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+    padding-bottom:40px;
+  }
+
+  .wrap{
+    max-width:520px;
+    margin:0 auto;
+    padding:0 18px;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:22px 0 16px;
+    text-align:center;
+  }
+  .hero h1{
+    font-family:'Sora',sans-serif;
+    font-weight:800;
+    font-size:clamp(24px,6.4vw,32px);
+    line-height:1.12;
+    margin:0 0 8px;
+    letter-spacing:-0.01em;
+  }
+  .hero p{
+    font-size:13.5px;
+    line-height:1.5;
+    color:#b9c6e0;
+    margin:0 auto;
+    max-width:38ch;
+  }
+
+  /* ---------- AD SLOTS ---------- */
+  .ad-slot{
+    margin:22px 0;
+    border:1px dashed rgba(255,255,255,0.18);
+    border-radius:var(--radius-md);
+    padding:14px;
+    text-align:center;
+    color:#7688aa;
+    font-size:11px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    font-weight:600;
+  }
+  .ad-slot span{display:block;margin-top:6px; min-height:60px; display:flex;align-items:center;justify-content:center;color:#4d5f82;font-size:12px;text-transform:none;letter-spacing:0;font-weight:500;}
+
+  /* ---------- CARD (form) ---------- */
+  .card{
+    background:var(--ice);
+    color:var(--navy-900);
+    border-radius:var(--radius-lg);
+    padding:16px 16px 18px;
+    box-shadow:0 20px 45px -18px rgba(3,12,30,0.55);
+  }
+  .card + .card{margin-top:16px;}
+
+  .step-head{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    margin-bottom:4px;
+  }
+  .step-num{
+    flex:none;
+    width:24px;height:24px;
+    border-radius:50%;
+    background:var(--blue-500);
+    color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Sora',sans-serif;
+    font-weight:700;
+    font-size:12px;
+  }
+  .step-head h2{
+    font-family:'Sora',sans-serif;
+    font-size:14.5px;
+    font-weight:700;
+    margin:2px 0 0;
+    line-height:1.25;
+  }
+  .step-sub{
+    font-size:11.5px;
+    color:var(--slate-400);
+    margin:4px 0 10px 34px;
+    line-height:1.4;
+  }
+
+  /* expense rows */
+  .expense-row{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:6px 0;
+  }
+  .expense-icon{
+    flex:none;
+    width:38px;height:38px;
+    border-radius:11px;
+    background:var(--field-bg);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .expense-icon svg{width:18px;height:18px;stroke:var(--blue-500);}
+  .expense-label{
+    flex:1;
+    font-size:13.5px;
+    font-weight:600;
+    color:var(--navy-900);
+  }
+  .expense-label small{
+    display:block;
+    font-weight:400;
+    color:var(--slate-400);
+    font-size:11px;
+    margin-top:1px;
+  }
+  .money-field{
+    position:relative;
+    width:128px;
+    flex:none;
+  }
+  .money-field span{
+    position:absolute;
+    left:12px; top:50%; transform:translateY(-50%);
+    font-size:13.5px;
+    font-weight:600;
+    color:var(--slate-400);
+    pointer-events:none;
+  }
+  .money-field input{
+    width:100%;
+    padding:10px 10px 10px 32px;
+    border-radius:var(--radius-sm);
+    border:1.5px solid transparent;
+    background:var(--field-bg);
+    color:var(--navy-900);
+    font-family:'JetBrains Mono',monospace;
+    font-size:13.5px;
+    font-weight:600;
+    text-align:right;
+    outline:none;
+    transition:background .15s,border-color .15s;
+  }
+  .money-field input:focus{
+    background:var(--field-bg-active);
+    border-color:var(--blue-400);
+  }
+
+  .divider{height:1px;background:var(--hairline-dark);margin:6px 0;}
+
+  .total-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background:var(--field-bg);
+    border-radius:var(--radius-md);
+    padding:12px 14px;
+    margin-top:10px;
+  }
+  .total-row .label{font-size:13px;font-weight:600;color:var(--navy-900);}
+  .total-row .value{
+    font-family:'JetBrains Mono',monospace;
+    font-weight:700;
+    font-size:17px;
+    color:var(--blue-500);
+  }
+
+  /* choice grids */
+  .choice-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:9px;
+    margin-left:0;
+  }
+  .choice-grid.cols-4{grid-template-columns:repeat(2,1fr);}
+  @media(min-width:400px){
+    .choice-grid.cols-4{grid-template-columns:repeat(4,1fr);}
+  }
+  .choice-btn{
+    border:1.5px solid var(--hairline-dark);
+    background:#fff;
+    border-radius:var(--radius-sm);
+    padding:12px 8px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:7px;
+    cursor:pointer;
+    font-family:'Inter',sans-serif;
+    font-size:12px;
+    font-weight:600;
+    color:var(--navy-900);
+    transition:all .15s;
+  }
+  .choice-btn svg{width:20px;height:20px;stroke:var(--slate-600);transition:stroke .15s;}
+  .choice-btn:hover{border-color:var(--blue-400);}
+  .choice-btn.active{
+    background:var(--navy-900);
+    border-color:var(--navy-900);
+    color:#fff;
+  }
+  .choice-btn.active svg{stroke:#fff;}
+
+  .section-gap{margin-top:16px;}
+
+  /* submit button */
+  .btn-primary{
+    width:100%;
+    border:none;
+    background:var(--blue-500);
+    color:#fff;
+    font-family:'Sora',sans-serif;
+    font-weight:700;
+    font-size:15px;
+    padding:15px;
+    border-radius:var(--radius-md);
+    cursor:pointer;
+    margin-top:16px;
+    transition:background .15s, transform .1s;
+  }
+  .btn-primary:hover{background:#255fdb;}
+  .btn-primary:active{transform:scale(.98);}
+  .btn-primary:disabled{background:#b7c6ea;cursor:not-allowed;}
+
+  .form-hint{
+    font-size:11.5px;
+    color:var(--slate-400);
+    text-align:center;
+    margin-top:10px;
+  }
+
+  /* ---------- RESULT CARD ---------- */
+  #result-section{display:none;}
+  .result-hero{
+    background:linear-gradient(165deg,var(--navy-900),var(--navy-800));
+    border-radius:var(--radius-lg);
+    padding:26px 20px;
+    text-align:center;
+    box-shadow:0 20px 45px -18px rgba(3,12,30,0.7);
+    border:1px solid var(--hairline);
+  }
+  .result-hero .kicker{
+    font-size:11.5px;
+    font-weight:700;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--blue-400);
+    margin-bottom:10px;
+  }
+  .result-hero .amount{
+    font-family:'JetBrains Mono',monospace;
+    font-weight:700;
+    font-size:clamp(34px,10vw,46px);
+    line-height:1;
+    letter-spacing:-0.01em;
+  }
+  .result-hero .amount sup{font-size:.42em;top:-0.6em;}
+  .result-hero .months{
+    margin-top:10px;
+    font-size:13.5px;
+    color:#b9c6e0;
+    font-weight:500;
+  }
+  .result-hero .months b{color:#fff;font-weight:700;}
+  .result-hero p.desc{
+    margin:16px auto 0;
+    max-width:36ch;
+    font-size:12.5px;
+    line-height:1.6;
+    color:#b9c6e0;
+  }
+
+  .breakdown{
+    background:var(--ice);
+    color:var(--navy-900);
+    border-radius:var(--radius-lg);
+    margin-top:14px;
+    overflow:hidden;
+    box-shadow:0 20px 45px -18px rgba(3,12,30,0.35);
+  }
+  .breakdown-head{
+    padding:16px 18px 12px;
+    font-family:'Sora',sans-serif;
+    font-weight:700;
+    font-size:12.5px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--slate-400);
+    border-bottom:1px solid var(--hairline-dark);
+  }
+  .breakdown-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:13px 18px;
+    font-size:13.5px;
+    border-bottom:1px solid var(--hairline-dark);
+  }
+  .breakdown-row:last-child{border-bottom:none;}
+  .breakdown-row .k{color:var(--slate-600);font-weight:500;}
+  .breakdown-row .v{font-family:'JetBrains Mono',monospace;font-weight:700;}
+  .breakdown-row.highlight .v{color:var(--blue-500);}
+
+  .info-box{
+    display:flex;
+    gap:10px;
+    background:var(--field-bg);
+    border-radius:var(--radius-md);
+    padding:14px 14px;
+    margin-top:14px;
+    font-size:12px;
+    line-height:1.55;
+    color:var(--slate-600);
+  }
+  .info-box svg{flex:none;width:16px;height:16px;stroke:var(--blue-500);margin-top:1px;}
+
+  .btn-ghost{
+    width:100%;
+    border:1.5px solid var(--hairline);
+    background:transparent;
+    color:#fff;
+    font-family:'Inter',sans-serif;
+    font-weight:600;
+    font-size:13.5px;
+    padding:13px;
+    border-radius:var(--radius-md);
+    cursor:pointer;
+    margin-top:14px;
+  }
+  .btn-ghost:hover{border-color:var(--blue-400);color:var(--blue-400);}
+
+  /* ---------- CTA BLOCK ---------- */
+  .cta-block{
+    margin-top:26px;
+    text-align:center;
+  }
+  .btn-cta{
+    width:100%;
+    border:none;
+    background:#fff;
+    color:var(--navy-900);
+    font-family:'Sora',sans-serif;
+    font-weight:700;
+    font-size:14.5px;
+    padding:16px;
+    border-radius:var(--radius-md);
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:9px;
+  }
+  .btn-cta svg{width:17px;height:17px;stroke:var(--navy-900);}
+  .btn-cta:hover{background:#eef2f9;}
+
+  .btn-outline-link{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    margin-top:12px;
+    font-size:12.5px;
+    font-weight:600;
+    color:#b9c6e0;
+    text-decoration:none;
+    border-bottom:1px solid rgba(185,198,224,0.4);
+    padding-bottom:2px;
+  }
+  .btn-outline-link:hover{color:#fff;}
+
+  /* ---------- PIX / SUPPORT ---------- */
+  .pix-box{
+    margin-top:26px;
+    background:linear-gradient(155deg,var(--navy-800),var(--navy-900));
+    border:1px solid var(--hairline);
+    border-radius:var(--radius-lg);
+    padding:22px 20px;
+  }
+  .pix-box h3{
+    font-family:'Sora',sans-serif;
+    font-size:15.5px;
+    margin:0 0 6px;
+  }
+  .pix-box p{
+    font-size:12.5px;
+    color:#b9c6e0;
+    line-height:1.6;
+    margin:0 0 14px;
+  }
+  .pix-key{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background:rgba(255,255,255,0.06);
+    border:1px dashed rgba(255,255,255,0.22);
+    border-radius:var(--radius-sm);
+    padding:11px 13px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:13px;
+    font-weight:500;
+  }
+  .pix-key button{
+    flex:none;
+    background:var(--blue-500);
+    border:none;
+    color:#fff;
+    font-size:11.5px;
+    font-weight:700;
+    padding:7px 12px;
+    border-radius:7px;
+    cursor:pointer;
+  }
+  .pix-key button:hover{background:#255fdb;}
+
+  /* ---------- GUIDE ---------- */
+  .guide{
+    margin-top:34px;
+    padding-top:28px;
+    border-top:1px solid var(--hairline);
+  }
+  .guide h2{
+    font-family:'Sora',sans-serif;
+    font-weight:700;
+    font-size:19px;
+    margin:0 0 6px;
+  }
+  .guide > p.lead{
+    font-size:13px;
+    color:#b9c6e0;
+    line-height:1.6;
+    margin:0 0 20px;
+    max-width:48ch;
+  }
+  .guide-block{
+    margin-bottom:18px;
+  }
+  .guide-block h3{
+    font-family:'Sora',sans-serif;
+    font-size:14.5px;
+    font-weight:700;
+    color:#fff;
+    margin:0 0 6px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .guide-block h3::before{
+    content:"";
+    width:6px;height:6px;
+    border-radius:50%;
+    background:var(--blue-400);
+    flex:none;
+  }
+  .guide-block p, .guide-block li{
+    font-size:12.5px;
+    line-height:1.65;
+    color:#b9c6e0;
+    margin:0;
+  }
+  .guide-block ul{
+    margin:8px 0 0;
+    padding-left:18px;
+  }
+  .guide-block li{margin-bottom:6px;}
+  .guide-block li b{color:#fff;}
+  .guide-table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:10px;
+    font-size:12px;
+  }
+  .guide-table th{
+    text-align:left;
+    color:var(--blue-400);
+    font-weight:700;
+    padding:0 10px 8px 0;
+    border-bottom:1px solid var(--hairline);
+  }
+  .guide-table td{
+    padding:9px 10px 9px 0;
+    color:#b9c6e0;
+    border-bottom:1px solid var(--hairline);
+  }
+  .guide-table td b{color:#fff;}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    margin-top:34px;
+    text-align:center;
+    font-size:11px;
+    color:#4d5f82;
+    line-height:1.7;
+  }
+
+  /* ---------- MODAL ---------- */
+  .modal-overlay{
+    display:none;
+    position:fixed;inset:0;
+    background:rgba(4,12,28,0.72);
+    backdrop-filter:blur(3px);
+    z-index:100;
+    align-items:flex-end;
+    justify-content:center;
+  }
+  .modal-overlay.open{display:flex;}
+  .modal{
+    background:var(--ice);
+    color:var(--navy-900);
+    width:100%;
+    max-width:520px;
+    border-radius:22px 22px 0 0;
+    padding:22px 20px 26px;
+    animation:slideup .25s ease-out;
+    max-height:88vh;
+    overflow-y:auto;
+  }
+  @media(min-width:560px){
+    .modal-overlay{align-items:center;}
+    .modal{border-radius:20px;}
+  }
+  @keyframes slideup{from{transform:translateY(24px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+  .modal-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    margin-bottom:4px;
+  }
+  .modal-head h3{
+    font-family:'Sora',sans-serif;
+    font-size:18px;
+    margin:0;
+  }
+  .modal-close{
+    background:var(--field-bg);
+    border:none;
+    width:30px;height:30px;
+    border-radius:50%;
+    cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    flex:none;
+  }
+  .modal-close svg{width:14px;height:14px;stroke:var(--navy-900);}
+  .modal p.sub{
+    font-size:12.5px;
+    color:var(--slate-400);
+    margin:6px 0 18px;
+  }
+  .field{margin-bottom:13px;}
+  .field label{
+    display:block;
+    font-size:12px;
+    font-weight:600;
+    margin-bottom:6px;
+    color:var(--slate-600);
+  }
+  .field input{
+    width:100%;
+    padding:12px 13px;
+    border-radius:var(--radius-sm);
+    border:1.5px solid var(--hairline-dark);
+    background:var(--field-bg);
+    font-family:'Inter',sans-serif;
+    font-size:13.5px;
+    color:var(--navy-900);
+    outline:none;
+  }
+  .field input:focus{border-color:var(--blue-400);background:#fff;}
+
+  .modal .btn-primary{margin-top:6px;}
+
+  .toast{
+    position:fixed;
+    left:50%;bottom:24px;
+    transform:translateX(-50%) translateY(20px);
+    background:var(--navy-900);
+    color:#fff;
+    padding:12px 20px;
+    border-radius:12px;
+    font-size:13px;
+    font-weight:600;
+    box-shadow:0 12px 30px -10px rgba(0,0,0,0.5);
+    z-index:200;
+    opacity:0;
+    pointer-events:none;
+    transition:all .25s ease;
+    display:flex;align-items:center;gap:8px;
+  }
+  .toast svg{width:15px;height:15px;stroke:#5be08c;}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+  ::selection{background:var(--blue-400);color:#fff;}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- HERO -->
+  <div class="hero">
+    <h1>Calcule sua Reserva de Emergência</h1>
+    <p>Preencha seus gastos mensais e descubra.</p>
+  </div>
+
+  <!-- FORM CARD -->
+  <div class="card" id="form-card">
+
+    <!-- Step 1 -->
+    <div class="step-head">
+      <div class="step-num">1</div>
+      <h2>Quais são seus gastos médios mensais?</h2>
+    </div>
+    <div class="step-sub">Preencha os valores de cada despesa ou deixe em branco se não se aplicar.</div>
+
+    <div id="expense-list"></div>
+
+    <div class="total-row">
+      <div class="label">Total de gastos mensais</div>
+      <div class="value" id="total-display">R$ 0,00</div>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="step-head section-gap">
+      <div class="step-num">2</div>
+      <h2>Qual é sua principal fonte de renda? <span style="font-weight:400;color:var(--slate-400);">(i)</span></h2>
+    </div>
+    <div class="choice-grid cols-4" id="income-grid"></div>
+
+    <!-- Step 3 -->
+    <div class="step-head section-gap">
+      <div class="step-num">3</div>
+      <h2>Quantas pessoas dependem da sua renda?</h2>
+    </div>
+    <div class="choice-grid cols-4" id="dependents-grid"></div>
+
+    <button class="btn-primary" id="calc-btn">Calcular minha reserva</button>
+    <div class="form-hint">Seus dados ficam salvos neste navegador para você refazer o cálculo mais rápido depois.</div>
+  </div>
+
+  <div class="ad-slot" id="ad-after-form">
+    Publicidade
+    <span><!-- Google AdSense --><ins class="adsbygoogle"
+         style="display:block;width:100%;min-height:60px"
+         data-ad-client="ca-pub-3116530456973971"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins></span>
+  </div>
+
+  <!-- RESULT -->
+  <div id="result-section">
+
+    <div class="result-hero">
+      <div class="kicker">Sua reserva de emergência ideal</div>
+      <div class="amount" id="result-amount">R$ 0,00</div>
+      <div class="months">Equivalente a <b id="result-months">0 meses</b> dos seus gastos</div>
+      <p class="desc">Essa é a quantia recomendada para manter sua tranquilidade em momentos de imprevistos.</p>
+    </div>
+
+    <div class="breakdown">
+      <div class="breakdown-head">Resumo dos cálculos</div>
+      <div class="breakdown-row">
+        <div class="k">Total de gastos mensais</div>
+        <div class="v" id="breakdown-total">R$ 0,00</div>
+      </div>
+      <div class="breakdown-row">
+        <div class="k">Meses recomendados</div>
+        <div class="v" id="breakdown-months">0 meses</div>
+      </div>
+      <div class="breakdown-row highlight">
+        <div class="k">Reserva de emergência ideal</div>
+        <div class="v" id="breakdown-final">R$ 0,00</div>
+      </div>
+    </div>
+
+    <div class="info-box">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="8.01"/><line x1="12" y1="11" x2="12" y2="16"/></svg>
+      <div>Essa reserva deve ficar aplicada em investimentos de alta liquidez e baixo risco, para que você possa utilizá-la rapidamente quando precisar.</div>
+    </div>
+
+    <button class="btn-ghost" id="redo-btn">Refazer o cálculo</button>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-block">
+    <button class="btn-cta" id="open-contact">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+      Quer criar sua solução? Fale conosco
+    </button>
+    <a href="https://cliquecriativo.com" target="_blank" rel="noopener" class="btn-outline-link">
+      Veja mais soluções
+      <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+    </a>
+  </div>
+
+  <!-- PIX -->
+  <div class="pix-box">
+    <h3>Contribua com o nosso projeto</h3>
+    <p>Se essa calculadora te ajudou, considere fazer um Pix de qualquer valor. Isso mantém a ferramenta no ar e gratuita para todo mundo.</p>
+    <div class="pix-key">
+      <span id="pix-key-text">pix@cliquecriativo.com</span>
+      <button id="copy-pix">Copiar</button>
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-bottom">
+    Publicidade
+    <span><ins class="adsbygoogle"
+         style="display:block;width:100%;min-height:60px"
+         data-ad-client="ca-pub-3116530456973971"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins></span>
+  </div>
+
+  <div class="guide">
+    <h2>O que é a reserva de emergência?</h2>
+    <p class="lead">Um guia rápido para entender por que ela existe, onde guardá-la e quanto separar em cada situação.</p>
+
+    <div class="guide-block">
+      <h3>O que é</h3>
+      <p>É um valor guardado à parte, fora dos seus investimentos de longo prazo, para cobrir seus gastos essenciais caso você perca a renda, fique doente ou enfrente uma despesa inesperada — sem precisar recorrer a empréstimos ou cartão de crédito.</p>
+    </div>
+
+    <div class="guide-block">
+      <h3>Onde investir</h3>
+      <p>O ideal é manter a reserva em aplicações de liquidez diária (resgate rápido, sem perder dinheiro) e baixo risco. As opções mais usadas no Brasil são:</p>
+      <ul>
+        <li><b>Tesouro Selic</b> — título público pós-fixado, considerado um dos investimentos mais seguros do país, com liquidez diária.</li>
+        <li><b>CDBs com liquidez diária</b> — emitidos por bancos, muitos rendem próximo de 100% do CDI e contam com proteção do FGC até o limite vigente.</li>
+        <li><b>Fundos DI de baixa taxa</b> — alternativa simples, mas vale comparar a taxa de administração antes de escolher.</li>
+      </ul>
+    </div>
+
+    <div class="guide-block">
+      <h3>Quantos meses guardar</h3>
+      <p>Não existe um número único — o ideal varia de acordo com a estabilidade da sua renda e quantas pessoas dependem dela:</p>
+      <table class="guide-table">
+        <tr><th>Perfil</th><th>Meses recomendados</th></tr>
+        <tr><td>Emprego CLT, apenas você</td><td><b>3 a 4 meses</b></td></tr>
+        <tr><td>Servidor público, apenas você</td><td><b>3 meses</b></td></tr>
+        <tr><td>Autônomo, PJ ou empresário</td><td><b>6 a 9 meses</b></td></tr>
+        <tr><td>Renda variável + dependentes</td><td><b>9 a 12 meses</b></td></tr>
+      </table>
+    </div>
+  </div>
+
+  <footer>
+    Feito com ❤️ por Clique Criativo
+  </footer>
+
+</div>
+
+<!-- CONTACT MODAL -->
+<div class="modal-overlay" id="contact-overlay">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>Vamos criar sua solução</h3>
+      <button class="modal-close" id="close-contact">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <p class="sub">Conte um pouco sobre você e sua empresa. Entramos em contato para entender sua ideia.</p>
+    <form id="contact-form">
+      <div class="field">
+        <label for="c-nome">Nome</label>
+        <input type="text" id="c-nome" required placeholder="Seu nome completo">
+      </div>
+      <div class="field">
+        <label for="c-telefone">Telefone</label>
+        <input type="tel" id="c-telefone" required placeholder="(00) 00000-0000">
+      </div>
+      <div class="field">
+        <label for="c-empresa">Empresa</label>
+        <input type="text" id="c-empresa" placeholder="Nome da sua empresa">
+      </div>
+      <div class="field">
+        <label for="c-instagram">@ do Instagram</label>
+        <input type="text" id="c-instagram" placeholder="@suaempresa">
+      </div>
+      <button type="submit" class="btn-primary" style="background:var(--navy-900);">Enviar</button>
+    </form>
+  </div>
+</div>
+
+<div class="toast" id="toast">
+  <svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+  <span id="toast-text">Salvo</span>
+</div>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3116530456973971"
+     crossorigin="anonymous"></script>
+<script>
+(function(){
+
+  // ---------- ICONS ----------
+  var icons = {
+    home:'<path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v10h14V10"/><path d="M9.5 20v-6h5v6"/>',
+    food:'<path d="M7 3v7a1 1 0 0 0 2 0V3M9 10v11M5 3v4a2 2 0 0 0 2 2M17 3c-1.5 1-2 2.6-2 5s1 4 2 5v8"/>',
+    drop:'<path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/>',
+    bolt:'<path d="M13 2 4 14h6l-1 8 9-12h-6z"/>',
+    wifi:'<path d="M2 8.5a15.5 15.5 0 0 1 20 0"/><path d="M5.5 12.3a10.8 10.8 0 0 1 13 0"/><path d="M9 16a5.5 5.5 0 0 1 6 0"/><circle cx="12" cy="19.2" r="1.1" fill="currentColor" stroke="none"/>',
+    car:'<path d="M5 17h14M5 17a2 2 0 1 1-4 0m4 0a2 2 0 1 0 4 0m10 0a2 2 0 1 1-4 0m4 0a2 2 0 1 0 4 0M3 17l1.5-5.5A2 2 0 0 1 6.4 10h11.2a2 2 0 0 1 1.9 1.5L21 17M9 10V6h6v4"/>',
+    heart:'<path d="M12 20s-7-4.6-9.4-9A5.4 5.4 0 0 1 12 6a5.4 5.4 0 0 1 9.4 5c-2.4 4.4-9.4 9-9.4 9z"/>',
+    cap:'<path d="M2 9l10-4 10 4-10 4-10-4z"/><path d="M6 11v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5"/><path d="M22 9v6"/>',
+    card:'<rect x="2.5" y="5.5" width="19" height="13" rx="2.2"/><line x1="2.5" y1="9.5" x2="21.5" y2="9.5"/><line x1="6" y1="14.5" x2="10" y2="14.5"/>',
+    dots:'<circle cx="6" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="18" cy="12" r="1.5"/>',
+    clt:'<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>',
+    gov:'<path d="M4 21h16M5 21V10M19 21V10M2 10l10-6 10 6M7 14v3M12 14v3M17 14v3"/>',
+    pj:'<circle cx="12" cy="8" r="3.4"/><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/>',
+    auton:'<path d="M8 20l2.2-8H7l3-8 6 9h-3.4L15 21z"/>',
+    biz:'<path d="M3 21h18M5 21V8l5-4 5 4v13M15 21v-8h4v8"/>',
+    p1:'<circle cx="12" cy="8" r="3.2"/><path d="M6 20c0-3.6 2.7-6 6-6s6 2.4 6 6"/>',
+    p2:'<circle cx="9" cy="8" r="2.8"/><circle cx="16" cy="9" r="2.4"/><path d="M3 20c0-3 2.6-5.2 6-5.2s6 2.2 6 5.2M15 20c0-2.2 1.7-4 4-4"/>',
+    p3:'<circle cx="7" cy="8" r="2.4"/><circle cx="12" cy="7.4" r="2.6"/><circle cx="17" cy="8" r="2.4"/><path d="M2 20c0-2.6 2.2-4.5 5-4.5M22 20c0-2.6-2.2-4.5-5-4.5M6.5 20c0-3 2.5-5.2 5.5-5.2s5.5 2.2 5.5 5.2"/>',
+    p4:'<circle cx="6" cy="8" r="2.2"/><circle cx="12" cy="7.2" r="2.4"/><circle cx="18" cy="8" r="2.2"/><path d="M2 20c0-2.4 1.8-4.2 4-4.2M22 20c0-2.4-1.8-4.2-4-4.2M8.5 20c0-2.7 1.6-4.6 3.5-4.6s3.5 1.9 3.5 4.6"/>'
+  };
+  function svg(name,sz){return '<svg viewBox="0 0 24 24" width="'+(sz||18)+'" height="'+(sz||18)+'" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'+icons[name]+'</svg>';}
+
+  // ---------- STATE ----------
+  var expenseDefs = [
+    {id:'aluguel', label:'Aluguel / Financiamento', icon:'home'},
+    {id:'alimentacao', label:'Alimentação', icon:'food'},
+    {id:'agua', label:'Água', icon:'drop'},
+    {id:'luz', label:'Luz', icon:'bolt'},
+    {id:'internet', label:'Internet e Telefone', icon:'wifi'},
+    {id:'transporte', label:'Transporte e combustível', icon:'car'},
+    {id:'saude', label:'Plano de saúde e medicamentos', icon:'heart'},
+    {id:'escola', label:'Escola ou faculdade', icon:'cap'},
+    {id:'parcelas', label:'Parcelas e outras contas fixas', icon:'card'},
+    {id:'outros', label:'Outros gastos', sub:'(opcional)', icon:'dots'}
+  ];
+  var incomeDefs = [
+    {id:'clt', label:'CLT', icon:'clt'},
+    {id:'servidor', label:'Servidor Público', icon:'gov'},
+    {id:'pj', label:'PJ', icon:'pj'},
+    {id:'autonomo', label:'Autônomo', icon:'auton'},
+    {id:'empresario', label:'Empresário', icon:'biz'}
+  ];
+  var depDefs = [
+    {id:'1', label:'Apenas eu', icon:'p1'},
+    {id:'2', label:'2 pessoas', icon:'p2'},
+    {id:'3', label:'3 pessoas', icon:'p3'},
+    {id:'4', label:'4 ou mais', icon:'p4'}
+  ];
+
+  var state = {
+    expenses: {},
+    income: null,
+    dependents: null
+  };
+
+  // ---------- IN-MEMORY "DEFAULT DATA" ----------
+  // Guarda o último cálculo feito nesta sessão do navegador para
+  // acelerar quando a pessoa quiser refazer.
+  var savedDefaults = null;
+
+  // ---------- RENDER FORM ----------
+  var expenseList = document.getElementById('expense-list');
+  expenseDefs.forEach(function(exp){
+    var row = document.createElement('div');
+    row.className = 'expense-row';
+    row.innerHTML =
+      '<div class="expense-icon">'+svg(exp.icon)+'</div>'+
+      '<div class="expense-label">'+exp.label+(exp.sub?'<small>'+exp.sub+'</small>':'')+'</div>'+
+      '<div class="money-field"><span>R$</span><input type="text" inputmode="decimal" placeholder="0,00" data-id="'+exp.id+'"></div>';
+    expenseList.appendChild(row);
+  });
+
+  var incomeGrid = document.getElementById('income-grid');
+  incomeDefs.forEach(function(inc){
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'choice-btn';
+    btn.dataset.id = inc.id;
+    btn.innerHTML = svg(inc.icon,20)+'<span>'+inc.label+'</span>';
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('#income-grid .choice-btn').forEach(function(b){b.classList.remove('active');});
+      btn.classList.add('active');
+      state.income = inc.id;
+    });
+    incomeGrid.appendChild(btn);
+  });
+
+  var depGrid = document.getElementById('dependents-grid');
+  depDefs.forEach(function(dep){
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'choice-btn';
+    btn.dataset.id = dep.id;
+    btn.innerHTML = svg(dep.icon,20)+'<span>'+dep.label+'</span>';
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('#dependents-grid .choice-btn').forEach(function(b){b.classList.remove('active');});
+      btn.classList.add('active');
+      state.dependents = dep.id;
+    });
+    depGrid.appendChild(btn);
+  });
+
+  // ---------- MONEY FORMATTING ----------
+  function parseMoney(str){
+    if(!str) return 0;
+    var clean = str.replace(/[^\d,]/g,'').replace(',', '.');
+    var val = parseFloat(clean);
+    return isNaN(val) ? 0 : val;
+  }
+  function formatBRL(num){
+    return num.toLocaleString('pt-BR', {style:'currency', currency:'BRL'});
+  }
+
+  var totalDisplay = document.getElementById('total-display');
+  function recalcTotal(){
+    var total = 0;
+    expenseDefs.forEach(function(exp){
+      total += parseMoney(state.expenses[exp.id]);
+    });
+    totalDisplay.textContent = formatBRL(total);
+    return total;
+  }
+
+  expenseList.addEventListener('input', function(e){
+    var input = e.target;
+    if(input.tagName !== 'INPUT') return;
+    var id = input.dataset.id;
+    var raw = input.value.replace(/[^\d,]/g,'');
+    state.expenses[id] = raw;
+    input.value = raw;
+    recalcTotal();
+  });
+
+  expenseList.addEventListener('blur', function(e){
+    var input = e.target;
+    if(input.tagName !== 'INPUT') return;
+    var val = parseMoney(input.value);
+    input.value = val ? val.toLocaleString('pt-BR',{minimumFractionDigits:2, maximumFractionDigits:2}) : '';
+  }, true);
+
+  // ---------- MONTHS FORMULA ----------
+  var incomeMonthsAdj = {clt:0, servidor:-1, pj:2, autonomo:3, empresario:3};
+  var depMonthsAdj = {'1':0, '2':1, '3':2, '4':3};
+  function calcMonths(income, dep){
+    var months = 3 + (incomeMonthsAdj[income]||0) + (depMonthsAdj[dep]||0);
+    return Math.max(3, Math.min(12, months));
+  }
+
+  // ---------- SUBMIT ----------
+  var formCard = document.getElementById('form-card');
+  var resultSection = document.getElementById('result-section');
+
+  document.getElementById('calc-btn').addEventListener('click', function(){
+    if(!state.income){
+      shake('#income-grid'); return;
+    }
+    if(!state.dependents){
+      shake('#dependents-grid'); return;
+    }
+    var total = recalcTotal();
+    var months = calcMonths(state.income, state.dependents);
+    var reserve = total * months;
+
+    document.getElementById('result-amount').textContent = formatBRL(reserve);
+    document.getElementById('result-months').textContent = months + (months===1?' mês':' meses');
+    document.getElementById('breakdown-total').textContent = formatBRL(total);
+    document.getElementById('breakdown-months').textContent = months + (months===1?' mês':' meses');
+    document.getElementById('breakdown-final').textContent = formatBRL(reserve);
+
+    // salva como predefinição para "refazer" mais rápido nesta sessão
+    savedDefaults = JSON.parse(JSON.stringify(state));
+
+    formCard.style.display = 'none';
+    resultSection.style.display = 'block';
+    resultSection.scrollIntoView({behavior:'smooth', block:'start'});
+  });
+
+  document.getElementById('redo-btn').addEventListener('click', function(){
+    resultSection.style.display = 'none';
+    formCard.style.display = 'block';
+    formCard.scrollIntoView({behavior:'smooth', block:'start'});
+  });
+
+  function shake(sel){
+    var el = document.querySelector(sel);
+    el.style.transition = 'transform .06s';
+    var n=0;
+    var iv = setInterval(function(){
+      el.style.transform = n%2===0 ? 'translateX(-4px)':'translateX(4px)';
+      n++;
+      if(n>5){clearInterval(iv); el.style.transform='';}
+    },45);
+  }
+
+  // ---------- PREFILL FROM SAVED DEFAULTS (se existirem nesta sessão) ----------
+  function applyDefaults(data){
+    if(!data) return;
+    expenseDefs.forEach(function(exp){
+      var val = data.expenses[exp.id];
+      if(val){
+        var input = expenseList.querySelector('[data-id="'+exp.id+'"]');
+        input.value = parseMoney(val).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+        state.expenses[exp.id] = val;
+      }
+    });
+    recalcTotal();
+    if(data.income){
+      var incBtn = incomeGrid.querySelector('[data-id="'+data.income+'"]');
+      if(incBtn){incBtn.classList.add('active'); state.income = data.income;}
+    }
+    if(data.dependents){
+      var depBtn = depGrid.querySelector('[data-id="'+data.dependents+'"]');
+      if(depBtn){depBtn.classList.add('active'); state.dependents = data.dependents;}
+    }
+  }
+
+  // ---------- CONTACT MODAL ----------
+  var overlay = document.getElementById('contact-overlay');
+  document.getElementById('open-contact').addEventListener('click', function(){
+    overlay.classList.add('open');
+  });
+  document.getElementById('close-contact').addEventListener('click', function(){
+    overlay.classList.remove('open');
+  });
+  overlay.addEventListener('click', function(e){
+    if(e.target === overlay) overlay.classList.remove('open');
+  });
+  document.getElementById('contact-form').addEventListener('submit', function(e){
+    e.preventDefault();
+    // Aqui entra a integração real (e-mail, CRM, planilha, etc.)
+    overlay.classList.remove('open');
+    showToast('Recebemos seus dados! Vamos entrar em contato em breve.');
+    e.target.reset();
+  });
+
+  // ---------- PIX COPY ----------
+  document.getElementById('copy-pix').addEventListener('click', function(){
+    var text = document.getElementById('pix-key-text').textContent;
+    navigator.clipboard.writeText(text).then(function(){
+      showToast('Chave Pix copiada!');
+    }).catch(function(){
+      showToast('Chave: '+text);
+    });
+  });
+
+  // ---------- TOAST ----------
+  var toast = document.getElementById('toast');
+  var toastTimer;
+  function showToast(msg){
+    document.getElementById('toast-text').textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){toast.classList.remove('show');}, 2600);
+  }
+
+})();
+</script>
+
+</body>
+</html>
