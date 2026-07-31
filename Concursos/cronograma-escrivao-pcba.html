@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cronograma de Estudos — Escrivão PC-BA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3116530456973971"
+     crossorigin="anonymous"></script>
+<style>
+  :root{
+    --purple: #6C5CE7;
+    --purple-deep: #4834B0;
+    --navy: #191d3a;
+    --navy-2: #232a52;
+    --paper: #f4f4fb;
+    --paper-2: #ececf8;
+    --mint: #00c896;
+    --mint-light: #4fe0b8;
+    --coral: #ff7a59;
+    --coral-2: #ffb054;
+    --ink: #1c1e33;
+    --muted: #8b8fb8;
+    --line: #e6e5f4;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background: var(--paper);
+    background-image:
+      radial-gradient(circle at 100% 0%, rgba(108,92,231,0.08), transparent 40%),
+      radial-gradient(circle at 0% 100%, rgba(0,200,150,0.06), transparent 40%);
+    color: var(--ink);
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    min-height:100vh;
+  }
+  .util-font{ font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif; }
+  .display-font{ font-family: 'Poppins', 'Inter', sans-serif; }
+
+  /* ---------- HEADER ---------- */
+  header{
+    background: linear-gradient(120deg, var(--purple) 0%, var(--purple-deep) 100%);
+    color: #fff;
+    padding: 36px 24px 30px;
+    position: relative;
+    overflow: hidden;
+  }
+  header::after{
+    content:"";
+    position:absolute; inset:0;
+    background-image: radial-gradient(circle at 85% 20%, rgba(255,255,255,0.14), transparent 45%);
+    pointer-events:none;
+  }
+  .eyebrow{
+    font-family:'Inter', Arial, sans-serif;
+    text-transform:uppercase;
+    letter-spacing:0.2em;
+    font-size:11px;
+    font-weight:700;
+    color: rgba(255,255,255,0.75);
+    margin-bottom:10px;
+  }
+  h1{
+    margin:0 0 6px;
+    font-family:'Poppins', 'Inter', sans-serif;
+    font-size: clamp(26px, 4vw, 38px);
+    font-weight:700;
+    letter-spacing:-0.01em;
+  }
+  .cargo{
+    font-family:'Inter', Arial, sans-serif;
+    font-size:14px;
+    color: rgba(255,255,255,0.8);
+    max-width:640px;
+  }
+
+  .wrap{ max-width: 920px; margin: 0 auto; padding: 0 20px; }
+
+  /* ---------- GATE (setup screen) ---------- */
+  .gate{
+    max-width:560px; margin: 60px auto; padding: 0 20px;
+  }
+  .gate-card{
+    background: #fff;
+    border:1px solid var(--line);
+    border-radius: 20px;
+    padding: 36px 32px;
+    box-shadow: 0 24px 50px -24px rgba(72,52,176,0.28);
+  }
+  .gate-card h2{
+    font-weight:700; margin-top:0; font-size:23px;
+    font-family:'Poppins','Inter',sans-serif; color:var(--navy);
+  }
+  .gate-card p{
+    font-family:'Inter', Arial, sans-serif;
+    font-size:14.5px; line-height:1.6; color:#5a5f8a;
+  }
+  .gate-actions{ display:flex; flex-direction:column; gap:12px; margin-top:22px; }
+  button, .btn{
+    font-family:'Inter', Arial, sans-serif;
+    cursor:pointer; border:none; border-radius:10px;
+    padding:13px 18px; font-size:14px; font-weight:600;
+    letter-spacing:0.01em;
+    transition: transform .12s ease, box-shadow .12s ease;
+  }
+  .btn-primary{ background: linear-gradient(120deg, var(--purple), var(--purple-deep)); color:#fff; box-shadow: 0 10px 20px -8px rgba(108,92,231,0.55); }
+  .btn-primary:hover{ transform: translateY(-1px); box-shadow: 0 14px 24px -8px rgba(108,92,231,0.6); }
+  .btn-secondary{ background: #fff; color: var(--purple-deep); border:1.5px solid var(--line); }
+  .btn-secondary:hover{ background: var(--paper-2); }
+  .gate-divider{
+    display:flex; align-items:center; gap:12px; margin:22px 0 14px;
+    font-family:'Inter', Arial, sans-serif; font-size:12px; color:#a3a7cc; text-transform:uppercase; letter-spacing:0.1em;
+  }
+  .gate-divider::before, .gate-divider::after{ content:""; flex:1; height:1px; background:var(--line); }
+  .code-input{
+    width:100%; padding:12px 14px; font-family:'Inter',Arial,sans-serif;
+    font-size:16px; letter-spacing:0.12em; text-transform:uppercase;
+    border:1.5px solid var(--line); border-radius:10px; margin-bottom:10px;
+  }
+  .code-input:focus{ outline:none; border-color:var(--purple); }
+  .gate-error{ font-family:'Inter',Arial,sans-serif; font-size:13px; color:#e5566b; margin-top:6px; display:none; }
+
+  /* ---------- MAIN APP ---------- */
+  #app{ display:none; }
+
+  .code-bar{
+    background: var(--navy);
+    padding:10px 20px;
+    font-family:'Inter', Arial, sans-serif;
+    font-size:12.5px;
+    color: rgba(255,255,255,0.65);
+    display:flex; align-items:center; justify-content:center; gap:8px; flex-wrap:wrap;
+  }
+  .code-bar b{ color: #fff; letter-spacing:0.12em; }
+  .code-bar button{ padding:5px 10px; font-size:11px; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18); border-radius:6px; color:#fff; font-weight:600; }
+  .code-bar button:hover{ background:rgba(255,255,255,0.18); }
+
+  /* ---------- STAT CARDS (visão geral) ---------- */
+  .stats{
+    margin: 28px 0 8px;
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap:16px;
+  }
+  .stat-card{
+    background:#fff;
+    border-radius:18px;
+    padding:20px 20px 18px;
+    box-shadow: 0 16px 34px -26px rgba(25,29,58,0.35);
+    display:flex; flex-direction:column; gap:10px;
+  }
+  .stat-top{ display:flex; align-items:center; justify-content:space-between; }
+  .stat-icon{
+    width:38px; height:38px; border-radius:11px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:17px; flex-shrink:0;
+  }
+  .stat-label{
+    font-family:'Inter', Arial, sans-serif; font-size:11.5px; font-weight:600;
+    text-transform:uppercase; letter-spacing:0.06em; color:var(--muted);
+  }
+  .stat-value{
+    font-family:'Poppins','Inter',sans-serif; font-size:26px; font-weight:700; color:var(--navy);
+    line-height:1.1;
+  }
+  .stat-sub{ font-family:'Inter',Arial,sans-serif; font-size:12px; color:var(--muted); }
+  .icon-purple{ background: linear-gradient(135deg, var(--purple), var(--purple-deep)); color:#fff; }
+  .icon-mint{ background: linear-gradient(135deg, var(--mint-light), var(--mint)); color:#fff; }
+  .icon-coral{ background: linear-gradient(135deg, var(--coral-2), var(--coral)); color:#fff; }
+  .icon-navy{ background: linear-gradient(135deg, var(--navy-2), var(--navy)); color:#fff; }
+
+  .overview{
+    margin: 22px 0 6px;
+    background:#fff;
+    border-radius:18px;
+    padding: 22px 24px;
+    display:flex; align-items:center; gap:26px;
+    flex-wrap:wrap;
+    box-shadow: 0 16px 34px -26px rgba(25,29,58,0.35);
+  }
+  .ring-wrap{ position:relative; width:112px; height:112px; flex-shrink:0; }
+  .ring-wrap svg{ transform: rotate(-90deg); }
+  .ring-bg{ stroke: var(--paper-2); }
+  .ring-fg{ stroke: url(#ringGradient); stroke-linecap: round; transition: stroke-dashoffset .4s ease; }
+  .ring-label{
+    position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;
+  }
+  .ring-label .pct{ font-size:24px; font-family:'Poppins','Inter',sans-serif; font-weight:700; color:var(--navy); }
+  .ring-label .cap{ font-size:9.5px; text-transform:uppercase; letter-spacing:0.1em; color:var(--muted); font-family:'Inter',Arial,sans-serif;}
+
+  .overview-text{ font-family:'Inter', Arial, sans-serif; }
+  .overview-text .big{ font-size:15px; color:#3a3f66; font-weight:600; margin-bottom:4px; }
+  .overview-text .small{ font-size:12.5px; color:var(--muted); }
+
+  .disc{
+    background:#fff;
+    border-radius:16px;
+    margin-bottom:14px;
+    overflow:hidden;
+    box-shadow: 0 12px 28px -24px rgba(25,29,58,0.3);
+  }
+  .disc-head{
+    padding:16px 20px;
+    display:flex; align-items:center; gap:16px;
+    cursor:pointer;
+    user-select:none;
+  }
+  .disc-num{
+    font-family:'Inter', Arial, sans-serif;
+    font-size:11px; color: var(--purple); font-weight:700; letter-spacing:0.06em;
+    width:26px; flex-shrink:0;
+  }
+  .disc-title{
+    flex:1; min-width:180px;
+    font-family:'Poppins','Inter',sans-serif;
+    font-size:16px; font-weight:600; color:var(--navy);
+  }
+  .disc-bar-wrap{
+    width:140px; height:7px; background:var(--paper-2); border-radius:6px; overflow:hidden; flex-shrink:0;
+  }
+  .disc-bar-fill{ height:100%; background: linear-gradient(90deg, var(--mint-light), var(--mint)); border-radius:6px; transition: width .3s ease; }
+  .disc-pct{
+    font-family:'Inter', Arial, sans-serif; font-size:12.5px; font-weight:600; color:var(--muted); width:70px; text-align:right; flex-shrink:0;
+  }
+  .disc-chevron{ font-size:12px; color:#c2c5e6; transition: transform .2s ease; flex-shrink:0; }
+  .disc.open .disc-chevron{ transform: rotate(180deg); }
+
+  .disc-body{
+    display:none;
+    padding: 4px 20px 18px 20px;
+    border-top:1px solid var(--paper-2);
+  }
+  .disc.open .disc-body{ display:block; }
+
+  .item{
+    display:flex; align-items:flex-start; gap:12px;
+    padding:11px 4px;
+    border-bottom:1px dashed var(--line);
+    font-family:'Inter', Arial, sans-serif;
+    font-size:13.8px;
+    line-height:1.5;
+    color:#3a3f66;
+  }
+  .item:last-child{ border-bottom:none; }
+  .item input[type=checkbox]{
+    margin-top:3px;
+    width:17px; height:17px; flex-shrink:0;
+    accent-color: var(--mint);
+    cursor:pointer;
+  }
+  .item.checked{ color:#b2b5d6; text-decoration: line-through; text-decoration-color:#d4d6ec; }
+  .item label{ cursor:pointer; }
+
+  footer{
+    text-align:center; padding:34px 20px 50px;
+    font-family:'Inter', Arial, sans-serif;
+    font-size:11.5px; color:#a3a7cc;
+  }
+
+  .toast{
+    position:fixed; bottom:20px; left:50%; transform:translateX(-50%) translateY(20px);
+    background: var(--navy); color:#fff; padding:10px 18px; border-radius:10px;
+    font-family:'Inter', Arial, sans-serif; font-size:13px;
+    opacity:0; transition: all .25s ease; pointer-events:none;
+    z-index:999;
+  }
+  .toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
+
+  .ad-slot{
+    margin: 22px 0;
+    padding: 14px;
+    background:#fff;
+    border-radius:14px;
+    box-shadow: 0 12px 28px -24px rgba(25,29,58,0.3);
+    display:flex; flex-direction:column; align-items:center; gap:6px;
+    min-height:100px;
+    justify-content:center;
+  }
+  .ad-slot .ad-tag{
+    font-family:'Inter', Arial, sans-serif; font-size:10px; text-transform:uppercase;
+    letter-spacing:0.12em; color:var(--muted); align-self:flex-start;
+  }
+  .ad-slot .adsbygoogle{ width:100%; }
+
+  @media (max-width:760px){
+    .stats{ grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width:520px){
+    .disc-title{ min-width:130px; font-size:15px; }
+    .disc-bar-wrap{ width:80px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="gate" id="gate">
+  <div class="gate-card">
+    <div class="eyebrow" style="color:var(--purple);">Polícia Civil da Bahia · Escrivão</div>
+    <h2>Seu cronograma de estudos</h2>
+    <p>Marque o conteúdo estudado por disciplina e acompanhe seu percentual de preparação. Seu progresso fica salvo com um código próprio — use o mesmo código para abrir em qualquer outro navegador ou aparelho.</p>
+    <div class="gate-actions">
+      <button class="btn-primary util-font" onclick="criarNovo()">Criar meu cronograma agora</button>
+    </div>
+    <div class="gate-divider">ou</div>
+    <input class="code-input" id="codeInput" placeholder="DIGITE SEU CÓDIGO" maxlength="8">
+    <button class="btn-secondary util-font" style="width:100%;" onclick="entrarComCodigo()">Abrir com meu código</button>
+    <div class="gate-error" id="gateError">Código não encontrado. Confira e tente novamente.</div>
+  </div>
+</div>
+
+<div id="app">
+  <header>
+    <div class="wrap">
+      <div class="eyebrow">Concurso · Polícia Civil da Bahia</div>
+      <h1>Escrivão de Polícia Civil</h1>
+      <div class="cargo">Cronograma de estudos por disciplina — marque cada conteúdo conforme for revisando e acompanhe seu percentual de preparação para a prova.</div>
+    </div>
+  </header>
+
+  <div class="code-bar">
+    <span>Seu código de acesso: <b id="codeDisplay">—</b></span>
+    <button onclick="copiarCodigo()">copiar código</button>
+    <button onclick="trocarCodigo()">usar outro código</button>
+  </div>
+
+  <div class="wrap">
+
+    <div class="stats">
+      <div class="stat-card">
+        <div class="stat-top">
+          <div class="stat-label">Data da prova</div>
+          <div class="stat-icon icon-purple">📅</div>
+        </div>
+        <div class="stat-value" id="statData">06/12/2026</div>
+        <div class="stat-sub">Domingo · Escrivão PC-BA</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-top">
+          <div class="stat-label">Dias até a prova</div>
+          <div class="stat-icon icon-coral">⏳</div>
+        </div>
+        <div class="stat-value" id="statDias">—</div>
+        <div class="stat-sub">contando a partir de hoje</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-top">
+          <div class="stat-label">Dias úteis até a prova</div>
+          <div class="stat-icon icon-mint">✔️</div>
+        </div>
+        <div class="stat-value" id="statUteis">—</div>
+        <div class="stat-sub">seg. a sex., sem feriados</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-top">
+          <div class="stat-label">Tópicos por dia</div>
+          <div class="stat-icon icon-navy">🎯</div>
+        </div>
+        <div class="stat-value" id="statPorDia">—</div>
+        <div class="stat-sub" id="statPorDiaSub">para terminar a tempo</div>
+      </div>
+    </div>
+
+    <div class="ad-slot">
+      <span class="ad-tag">Publicidade</span>
+      <ins class="adsbygoogle"
+           style="display:block; width:100%;"
+           data-ad-client="ca-pub-3116530456973971"
+           data-ad-slot="0000000001"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+    </div>
+
+    <div class="overview">
+      <div class="ring-wrap">
+        <svg width="112" height="112" viewBox="0 0 120 120">
+          <defs>
+            <linearGradient id="ringGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="var(--mint-light)"></stop>
+              <stop offset="100%" stop-color="var(--purple)"></stop>
+            </linearGradient>
+          </defs>
+          <circle class="ring-bg" cx="60" cy="60" r="52" fill="none" stroke-width="10"></circle>
+          <circle class="ring-fg" id="ringFg" cx="60" cy="60" r="52" fill="none" stroke-width="10"
+            stroke-dasharray="326.7" stroke-dashoffset="326.7"></circle>
+        </svg>
+        <div class="ring-label">
+          <div class="pct" id="pctOverall">0%</div>
+          <div class="cap">concluído</div>
+        </div>
+      </div>
+      <div class="overview-text">
+        <div class="big" id="overallLine">0 de 0 tópicos concluídos</div>
+        <div class="small">Toque em uma disciplina para abrir os conteúdos e marcar o que já estudou.</div>
+      </div>
+    </div>
+
+    <div id="disciplinas"></div>
+
+    <div class="ad-slot">
+      <span class="ad-tag">Publicidade</span>
+      <ins class="adsbygoogle"
+           style="display:block; width:100%;"
+           data-ad-client="ca-pub-3116530456973971"
+           data-ad-slot="0000000000"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+    </div>
+  </div>
+
+  <footer>Cronograma pessoal — os dados ficam salvos automaticamente vinculados ao seu código de acesso.</footer>
+</div>
+
+<div class="toast" id="toast">Salvo.</div>
+
+<script>
+// ---------------- DATA ----------------
+const DISCIPLINAS = [
+  { nome: "Língua Portuguesa", itens: [
+    "Compreensão e interpretação de texto; tipologia e gêneros textuais; elementos da comunicação e funções da linguagem.",
+    "Semântica: significação de palavras e expressões; sinonímia e antonímia; figuras de linguagem; reescrita de frases.",
+    "Morfologia: estrutura e formação de palavras; ortografia; acentuação gráfica; classes de palavras variáveis e invariáveis.",
+    "Sintaxe: termos da oração e relações sintático-semânticas; concordância e regência verbal/nominal; crase; colocação pronominal; funções do \"que\" e \"se\".",
+    "Reescrita de orações, períodos, frases e parágrafos.",
+    "Emprego dos sinais de pontuação e sua função no texto.",
+    "Elementos de coesão e suas funções no texto (referenciação, sequenciação).",
+    "Função textual dos vocábulos.",
+    "Redação Oficial (Manual de Redação da Presidência da República): gêneros, níveis de linguagem, análise de atos oficiais.",
+    "Variação linguística: norma culta."
+  ]},
+  { nome: "Raciocínio Lógico", itens: [
+    "Conjuntos numéricos: inteiros, racionais e reais.",
+    "Sistema Legal de medidas.",
+    "Razões e proporções: divisão proporcional; regra de três simples e composta; porcentagens.",
+    "Equações e inequações de 1º e 2º graus.",
+    "Sistemas lineares.",
+    "Funções e gráficos.",
+    "Princípios de contagem.",
+    "Progressões aritméticas e geométricas.",
+    "Compreensão de estruturas lógicas.",
+    "Lógica de argumentação: analogias, inferências, deduções e conclusões.",
+    "Lógica sentencial (proposicional): tabelas-verdade, equivalências, Leis de Morgan, diagramas lógicos.",
+    "Lógica de primeira ordem.",
+    "Princípios de contagem e probabilidade.",
+    "Operações com conjuntos.",
+    "Raciocínio lógico envolvendo problemas aritméticos, geométricos e matriciais."
+  ]},
+  { nome: "Atualidades", itens: [
+    "Atualidades internacionais, nacionais e do Estado da Bahia: conflitos geopolíticos, relações internacionais, direitos humanos, democracia, cidadania, desigualdades sociais, meio ambiente, mudanças climáticas, saúde pública, educação, trabalho, economia, violência, tecnologia da informação, cultura, problemas urbanos, segurança pública.",
+    "Comunicação: conceitos, efeitos e implicações sociais, econômicas, políticas e culturais."
+  ]},
+  { nome: "Informática", itens: [
+    "Windows 11 em português: fundamentos, janelas, menus, barra de tarefas, área de trabalho.",
+    "Pastas e arquivos: localização, movimentação, cópia, criação e exclusão.",
+    "Configurações básicas do Windows: resolução, cores, fontes, impressoras, aparência, plano de fundo, proteção de tela.",
+    "Windows Explorer.",
+    "Word: barras de ferramentas; formatação de documentos (margens, tabulação, recuo, espaçamento, fontes, estilos).",
+    "Word: listas e colunas; estilos e modelos; cabeçalhos e rodapés; configuração de página.",
+    "Excel: área de trabalho; seleção de células; números, fórmulas, datas; referência absoluta e relativa.",
+    "Excel: principais funções (matemáticas, estatísticas, data/hora, financeiras, texto); formatação; edição; classificação; gráficos.",
+    "PowerPoint: barras de ferramentas; criação de apresentações e slides; modos de visualização.",
+    "PowerPoint: objetos de texto, listas, tabelas, gráficos, organogramas; slide mestre; slides animados; integração com Word e Excel.",
+    "Redes: conceitos de Internet e Intranet; computação em nuvem.",
+    "Navegadores (Edge, Chrome, Firefox); Deep Web e Dark Web.",
+    "Correio eletrônico: endereços, utilização e recursos.",
+    "Segurança da informação: procedimentos, malwares, antivírus, criptografia.",
+    "Procedimentos de backup e armazenamento de dados em nuvem."
+  ]},
+  { nome: "Legislação Penal e Processual Extravagante", itens: [
+    "Lei nº 5.553/1968 — apresentação e uso de documentos de identificação pessoal.",
+    "Lei nº 13.869/2019 — Lei de Abuso de Autoridade.",
+    "Lei nº 7.716/1989 — crimes de preconceito de raça, cor, etnia, religião ou procedência nacional.",
+    "Lei nº 8.072/1990 — Lei dos Crimes Hediondos.",
+    "Lei nº 9.503/1997 — Código de Trânsito Brasileiro (crimes de trânsito).",
+    "Lei nº 9.455/1997 — Lei de Tortura.",
+    "Lei nº 9.605/1998 — Lei dos Crimes Ambientais.",
+    "Lei nº 10.826/2003 — Estatuto do Desarmamento.",
+    "Lei nº 11.340/2006 — Lei Maria da Penha.",
+    "Lei nº 11.343/2006 — Lei de Drogas.",
+    "Lei nº 7.960/1989 — Lei de Prisão Temporária.",
+    "Lei nº 9.099/1995 — Juizados Especiais Criminais.",
+    "Lei nº 10.259/2001 — Juizados Especiais Cíveis e Criminais (Justiça Federal).",
+    "Lei nº 9.296/1996 — Interceptação de comunicações telefônicas.",
+    "Lei nº 12.850/2013 — Lei das Organizações Criminosas.",
+    "Lei nº 8.069/1990 — Estatuto da Criança e do Adolescente.",
+    "Lei nº 10.741/2003 — Estatuto da Pessoa Idosa.",
+    "Lei nº 7.492/1986 — crimes contra o Sistema Financeiro Nacional.",
+    "Lei nº 4.737/1965 — Código Eleitoral.",
+    "Lei nº 7.210/1984 — Lei de Execução Penal.",
+    "Lei nº 8.137/1990 — crimes contra a ordem tributária, econômica e relações de consumo.",
+    "Lei nº 8.078/1990 (Título II) — infrações penais no Código de Defesa do Consumidor.",
+    "Lei nº 8.429/1992 — Lei de Improbidade Administrativa.",
+    "Declaração Universal dos Direitos Humanos (Resolução nº 217-A III/1948).",
+    "Decreto-Lei nº 3.688/1941 — Lei das Contravenções Penais.",
+    "Lei nº 9.613/1998 — Lei de Lavagem de Dinheiro.",
+    "Lei nº 12.037/2009 — Lei de Identificação Criminal.",
+    "Lei nº 12.830/2013 — Lei da Investigação Criminal.",
+    "Lei nº 9.807/1999 — Lei de Proteção a Vítimas e Testemunhas.",
+    "Lei nº 14.597/2023 — Lei Geral do Esporte (infrações penais).",
+    "Lei nº 13.146/2015 — Estatuto da Pessoa com Deficiência (crimes previstos).",
+    "Lei nº 14.344/2022 — Lei Henry Borel.",
+    "Lei nº 15.358/2026 — Marco Legal de Combate ao Crime Organizado.",
+    "Jurisprudência aplicada dos tribunais superiores e legislação aplicável a cada tópico do edital."
+  ]},
+  { nome: "Estatística", itens: [
+    "Estatística descritiva e análise exploratória de dados (gráficos, diagramas, tabelas, medidas de posição, dispersão, assimetria e curtose).",
+    "Probabilidade: definições básicas, axiomas, probabilidade condicional e independência.",
+    "Técnicas de amostragem: aleatória simples, estratificada, sistemática, por conglomerados; tamanho amostral.",
+    "Teorema de Bayes."
+  ]}
+];
+
+let CURRENT_CODE = null;
+let progresso = {}; // { "d-i": true }
+
+// ---------------- STORAGE HELPERS ----------------
+async function salvarMeuCodigo(code){
+  try{ await window.storage.set('meu_codigo', code, false); }catch(e){ console.error(e); }
+}
+async function lerMeuCodigo(){
+  try{
+    const r = await window.storage.get('meu_codigo', false);
+    return r ? r.value : null;
+  }catch(e){ return null; }
+}
+async function salvarProgresso(){
+  try{
+    await window.storage.set('progresso:' + CURRENT_CODE, JSON.stringify(progresso), true);
+  }catch(e){ console.error('Falha ao salvar', e); mostrarToast('Não foi possível salvar agora. Tente novamente.'); }
+}
+async function carregarProgresso(code){
+  try{
+    const r = await window.storage.get('progresso:' + code, true);
+    return r ? JSON.parse(r.value) : {};
+  }catch(e){
+    return null; // key doesn't exist yet, or error
+  }
+}
+function gerarCodigo(){
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  let s = '';
+  for(let i=0;i<6;i++) s += chars[Math.floor(Math.random()*chars.length)];
+  return s;
+}
+
+// ---------------- FLOW ----------------
+async function init(){
+  const existente = await lerMeuCodigo();
+  if(existente){
+    const dados = await carregarProgresso(existente);
+    CURRENT_CODE = existente;
+    progresso = dados || {};
+    mostrarApp();
+  }
+  // if no existing code, stay on gate screen
+}
+
+async function criarNovo(){
+  const code = gerarCodigo();
+  CURRENT_CODE = code;
+  progresso = {};
+  await salvarMeuCodigo(code);
+  await salvarProgresso();
+  mostrarApp();
+}
+
+async function entrarComCodigo(){
+  const input = document.getElementById('codeInput');
+  const code = input.value.trim().toUpperCase();
+  const err = document.getElementById('gateError');
+  if(!code){ err.style.display='block'; err.textContent='Digite um código.'; return; }
+  const dados = await carregarProgresso(code);
+  if(dados === null){
+    err.style.display='block';
+    err.textContent = 'Código não encontrado. Confira e tente novamente.';
+    return;
+  }
+  err.style.display='none';
+  CURRENT_CODE = code;
+  progresso = dados;
+  await salvarMeuCodigo(code);
+  mostrarApp();
+}
+
+function trocarCodigo(){
+  document.getElementById('app').style.display='none';
+  document.getElementById('gate').style.display='block';
+  document.getElementById('codeInput').value='';
+}
+
+function copiarCodigo(){
+  navigator.clipboard.writeText(CURRENT_CODE).then(()=> mostrarToast('Código copiado: ' + CURRENT_CODE));
+}
+
+function mostrarToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(()=> t.classList.remove('show'), 1800);
+}
+
+// ---------------- RENDER ----------------
+function mostrarApp(){
+  document.getElementById('gate').style.display='none';
+  document.getElementById('app').style.display='block';
+  document.getElementById('codeDisplay').textContent = CURRENT_CODE;
+  renderDisciplinas();
+  atualizarOverview();
+  ativarAnuncios();
+}
+
+function ativarAnuncios(){
+  try{
+    document.querySelectorAll('.adsbygoogle').forEach(()=>{
+      (window.adsbygoogle = window.adsbygoogle || []).push({});
+    });
+  }catch(e){ console.error('Adsense', e); }
+}
+
+function renderDisciplinas(){
+  const root = document.getElementById('disciplinas');
+  root.innerHTML = '';
+  DISCIPLINAS.forEach((disc, di)=>{
+    const card = document.createElement('div');
+    card.className = 'disc';
+    card.id = 'disc-' + di;
+
+    const head = document.createElement('div');
+    head.className = 'disc-head';
+    head.onclick = ()=> card.classList.toggle('open');
+    head.innerHTML = `
+      <div class="disc-num util-font">${String(di+1).padStart(2,'0')}</div>
+      <div class="disc-title">${disc.nome}</div>
+      <div class="disc-bar-wrap"><div class="disc-bar-fill" id="bar-${di}" style="width:0%"></div></div>
+      <div class="disc-pct util-font" id="pct-${di}">0/${disc.itens.length}</div>
+      <div class="disc-chevron">▾</div>
+    `;
+    card.appendChild(head);
+
+    const body = document.createElement('div');
+    body.className = 'disc-body';
+    disc.itens.forEach((texto, ii)=>{
+      const key = di + '-' + ii;
+      const row = document.createElement('div');
+      row.className = 'item';
+      row.id = 'item-' + key;
+      const checked = !!progresso[key];
+      if(checked) row.classList.add('checked');
+      row.innerHTML = `
+        <input type="checkbox" id="chk-${key}" ${checked ? 'checked' : ''}>
+        <label for="chk-${key}">${texto}</label>
+      `;
+      row.querySelector('input').addEventListener('change', (e)=> toggleItem(di, ii, e.target.checked));
+      body.appendChild(row);
+    });
+    card.appendChild(body);
+    root.appendChild(card);
+  });
+}
+
+function toggleItem(di, ii, checked){
+  const key = di + '-' + ii;
+  progresso[key] = checked;
+  document.getElementById('item-' + key).classList.toggle('checked', checked);
+  atualizarDisciplina(di);
+  atualizarOverview();
+  salvarProgresso();
+  mostrarToast(checked ? 'Progresso salvo.' : 'Atualizado.');
+}
+
+function atualizarDisciplina(di){
+  const disc = DISCIPLINAS[di];
+  let done = 0;
+  disc.itens.forEach((_, ii)=>{ if(progresso[di+'-'+ii]) done++; });
+  const pct = Math.round((done / disc.itens.length) * 100);
+  document.getElementById('bar-' + di).style.width = pct + '%';
+  document.getElementById('pct-' + di).textContent = `${done}/${disc.itens.length}`;
+}
+
+function atualizarOverview(){
+  let total = 0, done = 0;
+  DISCIPLINAS.forEach((disc, di)=>{
+    total += disc.itens.length;
+    disc.itens.forEach((_, ii)=>{ if(progresso[di+'-'+ii]) done++; });
+    atualizarDisciplina(di);
+  });
+  const pct = total ? Math.round((done/total)*100) : 0;
+  document.getElementById('pctOverall').textContent = pct + '%';
+  document.getElementById('overallLine').textContent = `${done} de ${total} tópicos concluídos`;
+  const circumference = 326.7;
+  const offset = circumference - (pct/100)*circumference;
+  document.getElementById('ringFg').style.strokeDashoffset = offset;
+
+  atualizarProva(total - done);
+}
+
+// ---------------- CONTAGEM REGRESSIVA DA PROVA ----------------
+const DATA_PROVA = new Date(2026, 11, 6); // 6 de dezembro de 2026
+
+function diasUteisEntre(inicio, fim){
+  let count = 0;
+  const cursor = new Date(inicio);
+  cursor.setDate(cursor.getDate() + 1); // não conta hoje
+  while(cursor <= fim){
+    const dow = cursor.getDay();
+    if(dow !== 0 && dow !== 6) count++;
+    cursor.setDate(cursor.getDate() + 1);
+  }
+  return count;
+}
+
+function atualizarProva(pendentes){
+  const hoje = new Date();
+  hoje.setHours(0,0,0,0);
+  const prova = new Date(DATA_PROVA);
+  prova.setHours(0,0,0,0);
+
+  const msPorDia = 1000 * 60 * 60 * 24;
+  const diasCorridos = Math.max(0, Math.round((prova - hoje) / msPorDia));
+  const diasUteis = Math.max(0, diasUteisEntre(hoje, prova));
+
+  document.getElementById('statDias').textContent = diasCorridos + (diasCorridos === 1 ? ' dia' : ' dias');
+  document.getElementById('statUteis').textContent = diasUteis + (diasUteis === 1 ? ' dia' : ' dias');
+
+  const porDiaEl = document.getElementById('statPorDia');
+  const porDiaSubEl = document.getElementById('statPorDiaSub');
+  if(diasCorridos <= 0){
+    porDiaEl.textContent = '—';
+    porDiaSubEl.textContent = 'a prova já chegou';
+  } else if(pendentes <= 0){
+    porDiaEl.textContent = '0';
+    porDiaSubEl.textContent = 'todo o conteúdo já foi revisado 🎉';
+  } else if(diasUteis > 0){
+    const porDia = Math.ceil(pendentes / diasUteis);
+    porDiaEl.textContent = porDia;
+    porDiaSubEl.textContent = `${pendentes} tópicos ÷ ${diasUteis} dias úteis`;
+  } else {
+    porDiaEl.textContent = pendentes;
+    porDiaSubEl.textContent = 'não há mais dias úteis — reveja tudo agora';
+  }
+}
+
+init();
+</script>
+</body>
+</html>
