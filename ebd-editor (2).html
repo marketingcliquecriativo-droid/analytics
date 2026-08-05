@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sua Leitura Diária da EBD</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold:   #C4922A;
+    --amber:  #A0681A;
+    --dark:   #1A1208;
+    --text:   #2C1E08;
+    --panel:  #F9F5EC;
+    --border: #DDD0B3;
+    --accent: #7A4F1A;
+    --green:  #25D366;
+    --bg:     #EDE5D0;
+    --radius: 12px;
+  }
+
+  html, body {
+    height: 100%;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 16px 0;
+    gap: 20px;
+    min-height: 100vh;
+  }
+
+  /* ── CABEÇALHO ── */
+  .site-header {
+    text-align: center;
+  }
+  .site-header h1 {
+    font-family: 'Lora', serif;
+    font-size: 1.45rem;
+    font-weight: 700;
+    color: var(--amber);
+    letter-spacing: -0.02em;
+  }
+  .site-header p {
+    font-size: 0.85rem;
+    color: var(--accent);
+    margin-top: 3px;
+    opacity: 0.8;
+  }
+
+  /* ── WORKSPACE: painel + preview lado a lado ── */
+  .workspace {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 24px;
+    width: 100%;
+    max-width: 980px;
+    align-items: start;
+  }
+
+  /* ── PAINEL DE EDIÇÃO ── */
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-width: 0;
+  }
+
+  .panel-title {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .field { display: flex; flex-direction: column; gap: 5px; }
+  .field label { font-size: 0.75rem; font-weight: 600; color: var(--accent); }
+  .field input, .field textarea {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 11px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.84rem;
+    color: var(--text);
+    background: #fff;
+    outline: none;
+    transition: border-color 0.2s;
+    resize: vertical;
+    width: 100%;
+  }
+  .field input:focus, .field textarea:focus { border-color: var(--gold); }
+  .field textarea { min-height: 120px; line-height: 1.6; }
+
+  /* Dias */
+  .days-row { display: flex; gap: 5px; flex-wrap: wrap; }
+  .day-btn {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    background: #fff;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    color: var(--accent);
+    cursor: pointer;
+    transition: all 0.18s;
+  }
+  .day-btn.active { background: var(--gold); border-color: var(--gold); color: #fff; }
+
+  /* Temas */
+  .theme-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+  .theme-opt {
+    border: 2px solid transparent;
+    border-radius: 8px;
+    padding: 7px 8px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+    color: #fff;
+    transition: all 0.18s;
+  }
+  .theme-opt.selected { border-color: #fff; box-shadow: 0 0 0 3px var(--gold); }
+
+  /* Botões */
+  .actions { display: flex; flex-direction: column; gap: 9px; margin-top: 2px; }
+  .btn {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 11px 14px;
+    border-radius: 8px;
+    font-size: 0.84rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: transform 0.15s, opacity 0.15s;
+    width: 100%;
+  }
+  .btn:active { transform: scale(0.97); }
+  .btn-download { background: var(--gold); color: #fff; }
+  .btn-download:hover { opacity: 0.9; }
+  .btn-whatsapp { background: var(--green); color: #fff; }
+  .btn-whatsapp:hover { opacity: 0.9; }
+  .btn svg { width: 17px; height: 17px; flex-shrink: 0; }
+
+  /* ── PREVIEW ── */
+  .preview-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+  }
+  .preview-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    opacity: 0.7;
+    align-self: flex-start;
+  }
+  /* Container do scaler: recebe tamanho via JS */
+  #scalerWrap {
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.18);
+  }
+  .card-scaler {
+    transform-origin: top left;
+    display: block;
+  }
+
+  /* ── CARD 1080×1920 ── */
+  #ebd-card {
+    width: 1080px;
+    height: 1920px;
+    position: relative;
+    overflow: hidden;
+    font-family: 'Lora', serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .card-bg { position: absolute; inset: 0; z-index: 0; }
+  .card-bg::after { content: ''; position: absolute; inset: 0; }
+  .card-overlay { position: absolute; inset: 0; z-index: 1; }
+  .card-content {
+    position: relative; z-index: 2;
+    width: 100%; height: 100%;
+    display: flex; flex-direction: column; align-items: center;
+    padding: 100px 80px 80px;
+    box-sizing: border-box;
+  }
+  .card-days { display: flex; gap: 22px; margin-bottom: 60px; flex-shrink: 0; }
+  .card-day {
+    width: 86px; height: 86px;
+    border-radius: 50%;
+    border: 3px solid rgba(255,255,255,0.5);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 1.05rem; font-weight: 700; letter-spacing: 0.05em;
+    color: rgba(255,255,255,0.7);
+    background: rgba(255,255,255,0.06);
+    flex-shrink: 0;
+  }
+  .card-day.active { background: #fff; color: #4A2E08; border-color: #fff; }
+  .card-title {
+    font-size: 8rem; font-weight: 700; color: #fff;
+    text-align: center; line-height: 1.05;
+    text-shadow: 0 4px 30px rgba(0,0,0,0.4);
+    margin-bottom: 40px; letter-spacing: -0.01em;
+    flex-shrink: 0;
+  }
+  .card-theme {
+    font-size: 2.6rem; font-weight: 700; color: #fff;
+    text-align: center; line-height: 1.4;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.35);
+    padding: 0 40px;
+    flex-shrink: 0;
+  }
+  .card-theme em { font-style: normal; color: #FFE09A; }
+  .card-ref {
+    font-size: 2.8rem; font-weight: 400; color: rgba(255,255,255,0.9);
+    margin-top: 22px; font-style: italic;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    flex-shrink: 0;
+  }
+  .card-verse-box {
+    background: rgba(255,255,255,0.13);
+    border: 1.5px solid rgba(255,255,255,0.25);
+    backdrop-filter: blur(8px);
+    border-radius: 28px;
+    padding: 55px 70px;
+    margin-top: 50px;
+    width: 100%;
+    flex-shrink: 0;
+  }
+  .card-verse {
+    font-size: 2.15rem; line-height: 1.75; color: #fff;
+    text-shadow: 0 1px 6px rgba(0,0,0,0.25);
+    white-space: pre-wrap;
+  }
+  .card-verse .vnum { font-size: 0.7em; vertical-align: super; margin-right: 4px; color: #FFE09A; font-style: normal; }
+  .card-footer {
+    flex-shrink: 0;
+    margin-top: 50px;
+    font-family: 'Inter', sans-serif;
+    font-size: 1.6rem; font-weight: 700; letter-spacing: 0.18em;
+    color: rgba(255,255,255,0.75); text-transform: uppercase;
+  }
+
+  /* ── TEMAS ── */
+  #ebd-card.theme-trigo .card-bg { background: linear-gradient(160deg,#5C3008 0%,#8B5A1A 30%,#6B3F0E 60%,#2A1505 100%); }
+  #ebd-card.theme-trigo .card-bg::after { background: radial-gradient(ellipse at 70% 30%,rgba(200,140,40,.18) 0%,transparent 65%); }
+  #ebd-card.theme-trigo .card-overlay { background: linear-gradient(180deg,rgba(30,12,0,.15) 0%,rgba(10,5,0,.55) 100%); }
+
+  #ebd-card.theme-azul .card-bg { background: linear-gradient(160deg,#0D1B3E 0%,#1A3060 40%,#0A2040 100%); }
+  #ebd-card.theme-azul .card-bg::after { background: radial-gradient(ellipse at 30% 20%,rgba(80,130,220,.2) 0%,transparent 60%); }
+  #ebd-card.theme-azul .card-overlay { background: linear-gradient(180deg,rgba(0,10,40,.15) 0%,rgba(0,5,20,.5) 100%); }
+  #ebd-card.theme-azul .card-theme em, #ebd-card.theme-azul .vnum { color: #A8C8FF !important; }
+  #ebd-card.theme-azul .card-day.active { color: #0D1B3E !important; }
+
+  #ebd-card.theme-verde .card-bg { background: linear-gradient(160deg,#0A2A12 0%,#1A4A25 40%,#0D3018 100%); }
+  #ebd-card.theme-verde .card-bg::after { background: radial-gradient(ellipse at 60% 25%,rgba(60,160,80,.18) 0%,transparent 60%); }
+  #ebd-card.theme-verde .card-overlay { background: linear-gradient(180deg,rgba(0,20,5,.15) 0%,rgba(0,10,2,.5) 100%); }
+  #ebd-card.theme-verde .card-theme em, #ebd-card.theme-verde .vnum { color: #A8F0B8 !important; }
+  #ebd-card.theme-verde .card-day.active { color: #0A2A12 !important; }
+
+  #ebd-card.theme-roxo .card-bg { background: linear-gradient(160deg,#1A0A35 0%,#38155A 40%,#200840 100%); }
+  #ebd-card.theme-roxo .card-bg::after { background: radial-gradient(ellipse at 40% 20%,rgba(160,80,220,.2) 0%,transparent 60%); }
+  #ebd-card.theme-roxo .card-overlay { background: linear-gradient(180deg,rgba(10,0,25,.15) 0%,rgba(5,0,15,.5) 100%); }
+  #ebd-card.theme-roxo .card-theme em, #ebd-card.theme-roxo .vnum { color: #DDB8FF !important; }
+  #ebd-card.theme-roxo .card-day.active { color: #1A0A35 !important; }
+
+  /* ── RODAPÉ DA PÁGINA ── */
+  .page-footer {
+    width: 100%;
+    max-width: 980px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 24px 0 40px;
+  }
+
+  /* Banner de anúncio */
+  .ad-banner {
+    width: 100%;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    min-height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+  .ad-banner-label {
+    position: absolute;
+    top: 6px; left: 10px;
+    font-size: 0.6rem;
+    color: #aaa;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    pointer-events: none;
+  }
+
+  /* PIX */
+  .pix-box {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 24px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .pix-icon {
+    width: 48px; height: 48px;
+    background: #32BCAD;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .pix-icon svg { width: 28px; height: 28px; }
+  .pix-text { flex: 1; min-width: 180px; }
+  .pix-text strong {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--dark);
+    display: block;
+    margin-bottom: 3px;
+  }
+  .pix-text span {
+    font-size: 0.82rem;
+    color: var(--accent);
+  }
+  .pix-key {
+    background: #fff;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--amber);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.18s;
+    white-space: nowrap;
+  }
+  .pix-key:hover { border-color: var(--gold); background: #FFFBF0; }
+  .pix-key svg { width: 15px; height: 15px; color: var(--gold); }
+
+  /* Toast */
+  .toast {
+    position: fixed;
+    bottom: 24px; left: 50%; transform: translateX(-50%) translateY(80px);
+    background: var(--dark); color: #FFE09A;
+    padding: 11px 22px; border-radius: 999px;
+    font-size: 0.82rem; font-weight: 600;
+    opacity: 0; pointer-events: none;
+    transition: all 0.3s ease;
+    z-index: 9999;
+    white-space: nowrap;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  /* Responsivo mobile */
+  @media (max-width: 680px) {
+    .workspace { grid-template-columns: 1fr; }
+    .preview-col { width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<div class="site-header">
+  <h1>Sua Leitura Diária da EBD</h1>
+  <p>Personalize, baixe e compartilhe.</p>
+</div>
+
+<!-- WORKSPACE -->
+<div class="workspace">
+
+  <!-- PAINEL -->
+  <div class="panel">
+    <div class="field">
+      <label>Tema Visual</label>
+      <div class="theme-grid" id="themeGrid">
+        <div class="theme-opt selected" data-theme="trigo" style="background:linear-gradient(135deg,#8B5A1A,#3D1A05)">🌾 Trigo</div>
+        <div class="theme-opt" data-theme="azul"  style="background:linear-gradient(135deg,#1A3060,#0D1B3E)">🌙 Noite</div>
+        <div class="theme-opt" data-theme="verde" style="background:linear-gradient(135deg,#1A4A25,#0A2A12)">🌿 Floresta</div>
+        <div class="theme-opt" data-theme="roxo"  style="background:linear-gradient(135deg,#38155A,#1A0A35)">✨ Real</div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Dia da Semana (ativo)</label>
+      <div class="days-row" id="daysRow">
+        <button class="day-btn active" data-day="0">SEG</button>
+        <button class="day-btn" data-day="1">TER</button>
+        <button class="day-btn" data-day="2">QUA</button>
+        <button class="day-btn" data-day="3">QUI</button>
+        <button class="day-btn" data-day="4">SEX</button>
+        <button class="day-btn" data-day="5">SAB</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Destaque do Tema (linha 1)</label>
+      <input type="text" id="themeTitle" value="O derramamento do Espírito">
+    </div>
+
+    <div class="field">
+      <label>Continuação do Tema (linha 2)</label>
+      <input type="text" id="themeSub" value="conduz o crente à plenitude da fé.">
+    </div>
+
+    <div class="field">
+      <label>Referência Bíblica</label>
+      <input type="text" id="reference" value="Atos 19.1-6">
+    </div>
+
+    <div class="field">
+      <label>Texto dos Versículos</label>
+      <textarea id="verseText">¹ E sucedeu que, enquanto Apolo estava em Corinto, Paulo, tendo passado por todas as regiões superiores, chegou a Éfeso; e achando ali alguns discípulos,
+² Disse-lhes: Recebestes vós já o Espírito Santo quando crestes? E eles disseram-lhe: Nós nem ainda ouvimos que haja Espírito Santo.
+³ Perguntou-lhes, então: Em que sois batizados então? E eles disseram: No batismo de João.
+⁴ Mas Paulo disse: Certamente João batizou com o batismo de arrependimento, dizendo ao povo que cresse no que após ele havia de vir, isto é, em Jesus Cristo.
+⁵ E os que ouviram foram batizados em nome do Senhor Jesus.
+⁶ E, impondo-lhes Paulo as mãos, veio sobre eles o Espírito Santo; e falavam línguas, e profetizavam.</textarea>
+    </div>
+
+    <div class="field">
+      <label>Rodapé</label>
+      <input type="text" id="footerTag" value="#DOMINGOTEM EBD">
+    </div>
+
+    <div class="actions">
+      <button class="btn btn-download" id="btnDownload">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Baixar Imagem (1080×1920)
+      </button>
+      <button class="btn btn-whatsapp" id="btnWhatsapp">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.985-1.312A9.953 9.953 0 0 0 12 22c5.523 0 10-4.477 10-10S17.522 2 11.999 2zm0 18.182a8.18 8.18 0 0 1-4.164-1.14l-.299-.178-3.096.814.826-3.017-.195-.31A8.14 8.14 0 0 1 3.82 12c0-4.514 3.667-8.182 8.18-8.182 4.514 0 8.181 3.668 8.181 8.182 0 4.513-3.667 8.182-8.182 8.182z" fill-rule="evenodd" clip-rule="evenodd"/></svg>
+        Compartilhar no WhatsApp
+      </button>
+    </div>
+  </div>
+
+  <!-- PREVIEW -->
+  <div class="preview-col">
+    <div id="scalerWrap">
+      <div class="card-scaler" id="cardScaler">
+        <div id="ebd-card" class="theme-trigo">
+          <div class="card-bg"></div>
+          <div class="card-overlay"></div>
+          <div class="card-content">
+            <div class="card-days" id="cardDays">
+              <div class="card-day active">SEG</div>
+              <div class="card-day">TER</div>
+              <div class="card-day">QUA</div>
+              <div class="card-day">QUI</div>
+              <div class="card-day">SEX</div>
+              <div class="card-day">SAB</div>
+            </div>
+            <div class="card-title">Leitura<br>Diária EBD</div>
+            <div class="card-theme">
+              <em id="cardThemeTitle">O derramamento do Espírito</em><br>
+              <span id="cardThemeSub">conduz o crente à plenitude da fé.</span>
+            </div>
+            <div class="card-ref" id="cardRef">Atos 19.1-6</div>
+            <div class="card-verse-box">
+              <div class="card-verse" id="cardVerse"></div>
+            </div>
+            <div class="card-footer" id="cardFooter">#DOMINGOTEM EBD</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /workspace -->
+
+<!-- RODAPÉ DA PÁGINA -->
+<div class="page-footer">
+
+  <!-- Banner de anúncio -->
+  <div class="ad-banner" id="adBanner">
+    <span class="ad-banner-label">Publicidade</span>
+  </div>
+
+  <!-- PIX -->
+  <div class="pix-box">
+    <div class="pix-icon">
+      <!-- Ícone PIX simplificado -->
+      <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M7.5 16L16 7.5L24.5 16L16 24.5L7.5 16Z" stroke="white" stroke-width="2.2" stroke-linejoin="round"/>
+        <path d="M16 7.5V3M16 29V24.5M7.5 16H3M29 16H24.5" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="pix-text">
+      <strong>Este projeto foi útil para você? 🙏</strong>
+      <span>Faça um PIX de R$ 1 — qualquer valor ajuda a manter a ferramenta gratuita!</span>
+    </div>
+    <div class="pix-key" id="pixCopy" title="Clique para copiar a chave PIX">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      pix@cliquecriativo.com
+    </div>
+  </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- Script de anúncio -->
+<script>(function(s){s.dataset.zone='11507353',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+
+<script>
+const DAYS = ['SEG','TER','QUA','QUI','SEX','SAB'];
+let activeDays = [0];
+
+// ── ESCALA DO PREVIEW ──
+function scaleCard() {
+  const wrap = document.getElementById('scalerWrap');
+  const scaler = document.getElementById('cardScaler');
+  // Largura disponível na coluna de preview
+  const col = wrap.parentElement;
+  const availW = col.clientWidth || 400;
+  const targetW = Math.max(160, Math.min(availW, 480));
+  const scale = targetW / 1080;
+  const scaledH = Math.round(1920 * scale);
+  // Aplicar
+  scaler.style.transform = `scale(${scale})`;
+  scaler.style.width  = '1080px';
+  scaler.style.height = '1920px';
+  wrap.style.width  = targetW + 'px';
+  wrap.style.height = scaledH + 'px';
+  wrap.style.overflow = 'hidden';
+}
+window.addEventListener('resize', scaleCard);
+// Aguardar fontes e layout
+window.addEventListener('load', scaleCard);
+setTimeout(scaleCard, 100);
+setTimeout(scaleCard, 600);
+
+// ── RENDERIZAR VERSÍCULO ──
+function renderVerse() {
+  const raw = document.getElementById('verseText').value;
+  const html = raw
+    .replace(/([¹²³⁴⁵⁶⁷⁸⁹⁰]+)/g, '<span class="vnum">$1</span>')
+    .replace(/\n/g, '<br>');
+  document.getElementById('cardVerse').innerHTML = html;
+  autoFitVerse();
+}
+
+// ── AUTO-FIT: reduz fonte até o conteúdo caber no card ──
+function autoFitVerse() {
+  const card       = document.getElementById('ebd-card');
+  const verseBox   = card.querySelector('.card-verse-box');
+  const verseEl    = card.querySelector('.card-verse');
+  const footer     = card.querySelector('.card-footer');
+  const content    = card.querySelector('.card-content');
+
+  // Resetar fonte para máximo
+  let fontSize = 2.15; // rem base (em px no card = 2.15 * 16 = 34.4px)
+  const BASE_PX = 16;
+  const MIN_PX  = 22; // mínimo absoluto
+
+  verseEl.style.fontSize = '';
+  verseEl.style.lineHeight = '';
+
+  // Altura total do card
+  const CARD_H = 1920;
+
+  // Calcular altura usada pelos elementos fixos (tudo exceto verse-box)
+  // top padding + days + title + theme + ref + verse-box-padding*2 + footer + bottom padding
+  // Mais simples: medir o offset do verseBox + sua padding + footer height + bottom padding
+  const contentPaddingTop    = 100;
+  const contentPaddingBottom = 80;
+  const footerH              = 70; // font 1.6rem * 16 * ~2 lines safe
+  const footerMarginTop      = 50;
+
+  // Altura disponível para a verse-box inteira
+  const fixedAbove = (() => {
+    // sum of all siblings before verse-box
+    let h = contentPaddingTop;
+    const children = Array.from(content.children);
+    for (const child of children) {
+      if (child === verseBox) break;
+      h += child.offsetHeight;
+      const st = getComputedStyle(child);
+      h += parseFloat(st.marginTop||0) + parseFloat(st.marginBottom||0);
+    }
+    return h;
+  })();
+
+  const verseBoxPaddingV = 55 * 2; // 55px top + 55px bottom (in card px)
+  const verseBoxMarginTop = 50;
+
+  const maxVerseBoxH = CARD_H - fixedAbove - verseBoxMarginTop - contentPaddingBottom - footerH - footerMarginTop;
+  const maxVerseH    = maxVerseBoxH - verseBoxPaddingV;
+
+  // Binary search para achar o maior font-size que cabe
+  let lo = MIN_PX, hi = Math.round(2.15 * BASE_PX);
+  verseEl.style.lineHeight = '1.75';
+
+  for (let iter = 0; iter < 20; iter++) {
+    const mid = Math.round((lo + hi) / 2);
+    verseEl.style.fontSize = mid + 'px';
+    if (verseEl.scrollHeight <= maxVerseH) {
+      lo = mid;
+    } else {
+      hi = mid - 1;
+    }
+    if (lo >= hi) break;
+  }
+  verseEl.style.fontSize = lo + 'px';
+}
+
+// ── DIAS ──
+function renderCardDays() {
+  document.getElementById('cardDays').innerHTML = DAYS.map((d,i) =>
+    `<div class="card-day ${activeDays.includes(i)?'active':''}">${d}</div>`
+  ).join('');
+}
+document.getElementById('daysRow').addEventListener('click', e => {
+  const btn = e.target.closest('.day-btn');
+  if (!btn) return;
+  const idx = +btn.dataset.day;
+  activeDays = [idx];
+  document.querySelectorAll('.day-btn').forEach(b => b.classList.toggle('active', +b.dataset.day === idx));
+  renderCardDays();
+});
+
+// ── TEMAS ──
+document.getElementById('themeGrid').addEventListener('click', e => {
+  const opt = e.target.closest('.theme-opt');
+  if (!opt) return;
+  document.querySelectorAll('.theme-opt').forEach(o => o.classList.toggle('selected', o === opt));
+  document.getElementById('ebd-card').className = 'theme-' + opt.dataset.theme;
+});
+
+// ── LIVE UPDATES ──
+document.getElementById('themeTitle').addEventListener('input', e => document.getElementById('cardThemeTitle').textContent = e.target.value);
+document.getElementById('themeSub').addEventListener('input',  e => document.getElementById('cardThemeSub').textContent  = e.target.value);
+document.getElementById('reference').addEventListener('input', e => document.getElementById('cardRef').textContent        = e.target.value);
+document.getElementById('verseText').addEventListener('input', renderVerse);
+document.getElementById('footerTag').addEventListener('input', e => document.getElementById('cardFooter').textContent    = e.target.value);
+
+// ── HELPER: capturar canvas sem escala ──
+async function captureCard() {
+  const scaler = document.getElementById('cardScaler');
+  const prev = scaler.style.transform;
+  scaler.style.transform = 'none';
+  const canvas = await html2canvas(document.getElementById('ebd-card'), {
+    width: 1080, height: 1920, scale: 1,
+    useCORS: true, allowTaint: true, backgroundColor: null, logging: false
+  });
+  scaler.style.transform = prev;
+  return canvas;
+}
+
+// ── DOWNLOAD ──
+document.getElementById('btnDownload').addEventListener('click', async () => {
+  showToast('⏳ Gerando imagem...');
+  try {
+    const canvas = await captureCard();
+    const link = document.createElement('a');
+    link.download = `ebd-${DAYS[activeDays[0]]||'seg'}.png`;
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+    showToast('✅ Imagem baixada!');
+  } catch(err) {
+    showToast('❌ Erro ao gerar imagem.');
+    console.error(err);
+  }
+});
+
+// ── WHATSAPP ──
+document.getElementById('btnWhatsapp').addEventListener('click', async () => {
+  const ref = document.getElementById('reference').value;
+  const t1  = document.getElementById('themeTitle').value;
+  const t2  = document.getElementById('themeSub').value;
+  const msg = `Paz do Senhor! Nossa leitura diária hoje se encontra em *${ref}* cujo tema nos mostra que *${t1} ${t2}*`;
+  try {
+    const canvas = await captureCard();
+    canvas.toBlob(async blob => {
+      const file = new File([blob], 'ebd.png', { type: 'image/png' });
+      if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+        await navigator.share({ files: [file], text: msg });
+      } else {
+        window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank');
+        showToast('💡 No desktop: baixe a imagem e envie junto!');
+      }
+    }, 'image/png');
+  } catch {
+    window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank');
+  }
+});
+
+// ── PIX COPY ──
+document.getElementById('pixCopy').addEventListener('click', () => {
+  navigator.clipboard.writeText('pix@cliquecriativo.com').then(() => {
+    showToast('✅ Chave PIX copiada!');
+  }).catch(() => {
+    showToast('📋 pix@cliquecriativo.com');
+  });
+});
+
+// ── TOAST ──
+function showToast(msg, dur=2800) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), dur);
+}
+
+// ── INIT ──
+renderVerse();
+renderCardDays();
+</script>
+</body>
+</html>
